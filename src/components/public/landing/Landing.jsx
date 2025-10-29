@@ -1,20 +1,117 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../styles.css';
+import xoch1 from '../../../assets/xoch1.webp';
+import xoch2 from '../../../assets/xoch2.jpg';
+import xoch3 from '../../../assets/xoch3.jpg';
+import xoch4 from '../../../assets/xoch4.jpg';
+import xoch5 from '../../../assets/xoch5.jpg';
 
 const Landing = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [xochiInView, setXochiInView] = useState(false);
+  const fanRef = useRef(null);
+  const [hoverI, setHoverI] = useState(null);
 
+  const prefersReduced =
+    typeof window !== 'undefined' &&
+    window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Indicador de scroll de tu header
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = (scrollTop / docHeight) * 100;
-      setScrollProgress(progress);
+    const onScroll = () => {
+      const st = window.scrollY || 0;
+      const dh = (document.documentElement?.scrollHeight || 0) - window.innerHeight;
+      setScrollProgress(dh > 0 ? (st / dh) * 100 : 0);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Saber si el fan está visible
+  useEffect(() => {
+    const el = fanRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => setXochiInView(e.isIntersecting)),
+      { threshold: [0, 0.15, 0.35, 0.6, 1] }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  // Separación con scroll (limitada para que nunca “se abran del todo”)
+  useEffect(() => {
+    const el = fanRef.current;
+    if (!el) return;
+
+    let raf = 0;
+    const computeSep = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const rect = el.getBoundingClientRect();
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        const centerDist = Math.abs((rect.top + rect.height / 2) - vh / 2);
+        const norm = Math.max(0, 1 - centerDist / (vh * 0.85));
+        const sep = Math.min(0.85, Math.max(0, norm));
+        el.style.setProperty('--sep', sep.toFixed(3));
+      });
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    const onScrollGuarded = () => {
+      if (xochiInView) computeSep();
+      else el.style.setProperty('--sep', '0');
+    };
+
+    window.addEventListener('scroll', onScrollGuarded, { passive: true });
+    onScrollGuarded();
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('scroll', onScrollGuarded);
+    };
+  }, [xochiInView]);
+
+  // Seguimiento del mouse (solo en vista y si no hay reduce-motion)
+  useEffect(() => {
+    const el = fanRef.current;
+    if (!el) return;
+
+    if (prefersReduced) {
+      el.style.setProperty('--mx', '0');
+      return;
+    }
+
+    const onMove = (ev) => {
+      if (!xochiInView) return;
+      const rect = el.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const mx = Math.max(-1, Math.min(1, (ev.clientX - cx) / (rect.width / 2)));
+      el.style.setProperty('--mx', mx.toFixed(3));
+    };
+    const onLeave = () => el.style.setProperty('--mx', '0');
+
+    el.addEventListener('mousemove', onMove);
+    el.addEventListener('mouseleave', onLeave);
+    return () => {
+      el.removeEventListener('mousemove', onMove);
+      el.removeEventListener('mouseleave', onLeave);
+    };
+  }, [xochiInView, prefersReduced]);
+
+  // Datos del fan: índices -2..2 con tier y abs precalculados
+  const fanItems = [
+    { img: xoch1, alt: 'Xochitepec 1', i: -2 },
+    { img: xoch2, alt: 'Xochitepec 2', i: -1 },
+    { img: xoch3, alt: 'Xochitepec 3', i:  0 },
+    { img: xoch4, alt: 'Xochitepec 4', i:  1 },
+    { img: xoch5, alt: 'Xochitepec 5', i:  2 },
+  ].map((it) => ({
+    ...it,
+    absI: Math.abs(it.i),
+    tier: (Math.abs(it.i) * 8) * -1, // baja un poco las laterales
+  }));
 
   return (
     <div className="landing-container">
@@ -39,6 +136,7 @@ const Landing = () => {
       {/* Section 1: ¿Qué es Xochitepec? */}
       <section id="xochitepec" className="section">
         <h2 className="section-title">¿Qué es Xochitepec?</h2>
+
         <div className="card-grid">
           <div className="card">
             <div className="card-icon">🏛️</div>
@@ -67,6 +165,29 @@ const Landing = () => {
               que se reflejan en cada proyecto agrícola.
             </p>
           </div>
+        </div>
+
+        {/* Fan deck carousel */}
+        <div className="fan-wrap">
+        <div
+            ref={fanRef}
+            className={`fan ${xochiInView ? 'is-inview' : ''}`}
+            role="region"
+            aria-label="Galería estilo abanico de Xochitepec"
+            data-hover={hoverI ?? ''}
+        >
+            {fanItems.map(({ img, alt, i, absI, tier }) => (
+            <div
+                key={i}
+                className="fan-card"
+                style={{ '--i': i, '--absI': absI, '--tier': `${tier}px` }}
+                onMouseEnter={() => setHoverI(String(i))}
+                onMouseLeave={() => setHoverI(null)}
+            >
+                <img src={img} alt={alt} loading="lazy" />
+            </div>
+            ))}
+        </div>
         </div>
       </section>
 
