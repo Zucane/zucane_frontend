@@ -13,7 +13,6 @@ function Contact() { return <div style={{ padding: 24 }}><h2>Contacto</h2></div>
 export default function App() {
   return (
     <Router>
-      <TopNavBar />
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/services" element={<Services />} />

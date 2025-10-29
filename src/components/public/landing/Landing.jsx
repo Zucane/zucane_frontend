@@ -5,6 +5,7 @@ import xoch2 from '../../../assets/xoch2.jpg';
 import xoch3 from '../../../assets/xoch3.jpg';
 import xoch4 from '../../../assets/xoch4.jpg';
 import xoch5 from '../../../assets/xoch5.jpg';
+import TopNavBar from '../../TopNavBar';
 
 const Landing = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -115,6 +116,7 @@ const Landing = () => {
 
   return (
     <div className="landing-container">
+        <TopNavBar/>
       <div 
         className="scroll-indicator" 
         style={{ transform: `scaleX(${scrollProgress / 100})` }}
@@ -136,7 +138,6 @@ const Landing = () => {
       {/* Section 1: ¿Qué es Xochitepec? */}
       <section id="xochitepec" className="section">
         <h2 className="section-title">¿Qué es Xochitepec?</h2>
-
         <div className="card-grid">
           <div className="card">
             <div className="card-icon">🏛️</div>
