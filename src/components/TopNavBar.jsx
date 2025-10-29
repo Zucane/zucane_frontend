@@ -1,0 +1,72 @@
+import React, { useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom';
+import logo from '../assets/logo.jpeg';
+import './nav.css';
+
+export default function TopNavBar() {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const [open, setOpen] = useState(false);
+
+    const itemsCenter = [
+        { label: 'Inicio', to: '/' },
+        { label: 'Problema', to: '/services' },
+        { label: 'Solución', to: '/about' },
+        { label: 'Usuario', to: '/contact' },
+        { label: 'Propuesta', to: '/propuesta' },
+        { label: 'Impacto', to: '/impacto' },
+    ];
+    const itemsRight = [
+        { label: 'Iniciar', to: '/login' },
+        { label: 'Register', to: '/register' },
+    ];
+
+    const isActive = (to) => location.pathname === to;
+
+    return (
+        <header className="top-navbar">
+            <div className="top-nav-container">
+                <a
+                    className="top-brand"
+                    onClick={() => { setOpen(false); navigate('/'); }}
+                    role="button"
+                    tabIndex={0}
+                >
+                    <img src={logo} alt="Logo" style={{ width: '70px' }}/>
+                </a>
+
+                <button
+                    className="top-burger"
+                    onClick={() => setOpen(v => !v)}
+                    aria-label="Abrir menú"
+                    aria-expanded={open}
+                >
+                    ☰
+                </button>
+
+                <nav className={`top-nav ${open ? 'open' : ''} center-nav`}>
+                    {itemsCenter.map(i => (
+                        <button
+                            key={i.to}
+                            onClick={() => { setOpen(false); navigate(i.to); }}
+                            className={`top-link ${isActive(i.to) ? 'active' : ''}`}
+                        >
+                            {i.label}
+                        </button>
+                    ))}
+                </nav>
+                <nav className={`top-nav right-nav`}>
+                    {itemsRight.map(i => (
+                        <button
+                            key={i.to}
+                            onClick={() => { setOpen(false); navigate(i.to); }}
+                            className={`top-link ${isActive(i.to) ? 'active' : ''}`}
+                        >
+                            {i.label}
+                        </button>
+                    ))}
+                </nav>
+            </div>
+        </header>
+    )
+}
