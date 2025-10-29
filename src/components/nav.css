@@ -58,6 +58,19 @@
     font-weight: 700;
 }
 
+.top-link:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.top-nav.center-nav {
+    flex: 1;
+    justify-content: center;
+}
+.top-nav.right-nav {
+    justify-content: flex-end;
+}
+
 @media (max-width: 800px) {
     .top-burger {
         display: block;

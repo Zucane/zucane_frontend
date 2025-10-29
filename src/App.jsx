@@ -4,11 +4,11 @@ import TopNavBar from './components/TopNavBar';
 import Landing from './components/public/landing/Landing';
 import './App.css';
 import './components/nav.css';
+import Login from './components/user/managment/Login';
 
 function Services() { return <div style={{ padding: 24 }}><h2>Servicios</h2></div> }
 function About() { return <div style={{ padding: 24 }}><h2>Acerca</h2></div> }
 function Contact() { return <div style={{ padding: 24 }}><h2>Contacto</h2></div> }
-function Login() { return <div style={{ padding: 24 }}><h2>Login</h2></div> }
 
 export default function App() {
   return (

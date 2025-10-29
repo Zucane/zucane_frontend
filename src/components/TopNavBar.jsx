@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom';
+import logo from '../assets/logo.jpeg';
 import './nav.css';
 
 export default function TopNavBar() {
@@ -7,12 +8,17 @@ export default function TopNavBar() {
     const location = useLocation();
     const [open, setOpen] = useState(false);
 
-    const items = [
+    const itemsCenter = [
         { label: 'Inicio', to: '/' },
-        { label: 'Servicios', to: '/services' },
-        { label: 'Acerca', to: '/about' },
-        { label: 'Contacto', to: '/contact' },
+        { label: 'Problema', to: '/services' },
+        { label: 'Solución', to: '/about' },
+        { label: 'Usuario', to: '/contact' },
+        { label: 'Propuesta', to: '/propuesta' },
+        { label: 'Impacto', to: '/impacto' },
+    ];
+    const itemsRight = [
         { label: 'Iniciar', to: '/login' },
+        { label: 'Register', to: '/register' },
     ];
 
     const isActive = (to) => location.pathname === to;
@@ -20,14 +26,14 @@ export default function TopNavBar() {
     return (
         <header className="top-navbar">
             <div className="top-nav-container">
-                <div
+                <a
                     className="top-brand"
                     onClick={() => { setOpen(false); navigate('/'); }}
                     role="button"
                     tabIndex={0}
                 >
-                    QRise
-                </div>
+                    <img src={logo} alt="Logo" style={{ width: '70px' }}/>
+                </a>
 
                 <button
                     className="top-burger"
@@ -38,8 +44,19 @@ export default function TopNavBar() {
                     ☰
                 </button>
 
-                <nav className={`top-nav ${open ? 'open' : ''}`}>
-                    {items.map(i => (
+                <nav className={`top-nav ${open ? 'open' : ''} center-nav`}>
+                    {itemsCenter.map(i => (
+                        <button
+                            key={i.to}
+                            onClick={() => { setOpen(false); navigate(i.to); }}
+                            className={`top-link ${isActive(i.to) ? 'active' : ''}`}
+                        >
+                            {i.label}
+                        </button>
+                    ))}
+                </nav>
+                <nav className={`top-nav right-nav`}>
+                    {itemsRight.map(i => (
                         <button
                             key={i.to}
                             onClick={() => { setOpen(false); navigate(i.to); }}
