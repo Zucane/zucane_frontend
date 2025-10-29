@@ -7,6 +7,7 @@ import xoch4 from '../../assets/xoch4.jpg';
 import xoch5 from '../../assets/xoch5.jpg';
 import { FaLandmark, FaHandshake, FaLeaf, FaBriefcase, FaCertificate, FaWind, FaSearch, FaLock, FaChartBar, FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaBolt, FaDollarSign, FaGlobeAmericas } from 'react-icons/fa';
 import { GiWheat } from 'react-icons/gi';
+import TopNavBar from '../../TopNavBar';
 
 const Landing = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -115,7 +116,8 @@ const Landing = () => {
 
   return (
     <div className="landing-container">
-      <div 
+        <TopNavBar/>
+      <div
         className="scroll-indicator" 
         style={{ transform: `scaleX(${scrollProgress / 100})` }}
       />
@@ -136,7 +138,6 @@ const Landing = () => {
       {/* Section 1: ¿Qué es Xochitepec? */}
       <section id="xochitepec" className="section">
         <h2 className="section-title">¿Qué es Xochitepec?</h2>
-
         <div className="card-grid">
           <div className="card">
             <div className="card-icon"><FaLandmark /></div>
