@@ -7,7 +7,7 @@ import xoch4 from '../../assets/xoch4.jpg';
 import xoch5 from '../../assets/xoch5.jpg';
 import { FaLandmark, FaHandshake, FaLeaf, FaBriefcase, FaCertificate, FaWind, FaSearch, FaLock, FaChartBar, FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaBolt, FaDollarSign, FaGlobeAmericas } from 'react-icons/fa';
 import { GiWheat } from 'react-icons/gi';
-import TopNavBar from '../../TopNavBar';
+import TopNavBar from '../TopNavBar';
 
 const Landing = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
