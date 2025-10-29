@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import TopNavBar from './components/TopNavBar';
-import Landing from './components/public/landing/Landing';
+import Landing from './components/public/Landing';
 import './App.css';
 import './components/nav.css';
 import Login from './components/user/managment/Login';

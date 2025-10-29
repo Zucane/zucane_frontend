@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import '../styles.css';
-import xoch1 from '../../../assets/xoch1.webp';
-import xoch2 from '../../../assets/xoch2.jpg';
-import xoch3 from '../../../assets/xoch3.jpg';
-import xoch4 from '../../../assets/xoch4.jpg';
-import xoch5 from '../../../assets/xoch5.jpg';
+import './styles.css';
+import xoch1 from '../../assets/xoch1.webp';
+import xoch2 from '../../assets/xoch2.jpg';
+import xoch3 from '../../assets/xoch3.jpg';
+import xoch4 from '../../assets/xoch4.jpg';
+import xoch5 from '../../assets/xoch5.jpg';
 import { FaLandmark, FaHandshake, FaLeaf, FaBriefcase, FaCertificate, FaWind, FaSearch, FaLock, FaChartBar, FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaBolt, FaDollarSign, FaGlobeAmericas } from 'react-icons/fa';
 import { GiWheat } from 'react-icons/gi';
 
