@@ -5,6 +5,8 @@ import xoch2 from '../../../assets/xoch2.jpg';
 import xoch3 from '../../../assets/xoch3.jpg';
 import xoch4 from '../../../assets/xoch4.jpg';
 import xoch5 from '../../../assets/xoch5.jpg';
+import { FaLandmark, FaHandshake, FaLeaf, FaBriefcase, FaCertificate, FaWind, FaSearch, FaLock, FaChartBar, FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaBolt, FaDollarSign, FaGlobeAmericas } from 'react-icons/fa';
+import { GiWheat } from 'react-icons/gi';
 
 const Landing = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -41,7 +43,6 @@ const Landing = () => {
     return () => io.disconnect();
   }, []);
 
-  // Separación con scroll (limitada para que nunca “se abran del todo”)
   useEffect(() => {
     const el = fanRef.current;
     if (!el) return;
@@ -53,8 +54,8 @@ const Landing = () => {
         const rect = el.getBoundingClientRect();
         const vh = window.innerHeight || document.documentElement.clientHeight;
         const centerDist = Math.abs((rect.top + rect.height / 2) - vh / 2);
-        const norm = Math.max(0, 1 - centerDist / (vh * 0.85));
-        const sep = Math.min(0.85, Math.max(0, norm));
+        const norm = Math.max(0, 1 - centerDist / (vh * 0.9));
+        const sep = Math.min(0.9, Math.max(0, norm));
         el.style.setProperty('--sep', sep.toFixed(3));
       });
     };
@@ -100,7 +101,6 @@ const Landing = () => {
     };
   }, [xochiInView, prefersReduced]);
 
-  // Datos del fan: índices -2..2 con tier y abs precalculados
   const fanItems = [
     { img: xoch1, alt: 'Xochitepec 1', i: -2 },
     { img: xoch2, alt: 'Xochitepec 2', i: -1 },
@@ -139,7 +139,7 @@ const Landing = () => {
 
         <div className="card-grid">
           <div className="card">
-            <div className="card-icon">🏛️</div>
+            <div className="card-icon"><FaLandmark /></div>
             <h3 className="card-title">Pueblo Mágico</h3>
             <p className="card-text">
               Xochitepec es un encantador pueblo mágico ubicado en Morelos, México, 
@@ -148,7 +148,7 @@ const Landing = () => {
             </p>
           </div>
           <div className="card">
-            <div className="card-icon">🌾</div>
+            <div className="card-icon"><GiWheat /></div>
             <h3 className="card-title">Tradición Agrícola</h3>
             <p className="card-text">
               Con una historia centenaria en el cultivo de caña de azúcar, 
@@ -157,7 +157,7 @@ const Landing = () => {
             </p>
           </div>
           <div className="card">
-            <div className="card-icon">🤝</div>
+            <div className="card-icon"><FaHandshake /></div>
             <h3 className="card-title">Cultura Comunitaria</h3>
             <p className="card-text">
               La comunidad de Xochitepec mantiene valores arraigados de 
@@ -195,8 +195,8 @@ const Landing = () => {
       <section id="cana-azucar" className="section">
         <h2 className="section-title">El Valor de la Caña de Azúcar</h2>
         <div className="card">
-          <h3 style={{ color: 'var(--dark-green)', marginBottom: '1.5rem', fontSize: '1.5rem' }}>
-            🌱 Agroindustria Sostenible en Xochitepec
+          <h3 style={{ display: 'flex', alignItems: 'center', gap: '10px', justifyContent: 'center', color: 'var(--dark-green)', marginBottom: '1.5rem', fontSize: '1.5rem' }}>
+            <FaLeaf /> Agroindustria Sostenible en Xochitepec
           </h3>
           <p style={{ marginBottom: '2rem', fontSize: '1.1rem', lineHeight: '1.7' }}>
             La caña de azúcar en Xochitepec no es solo un cultivo tradicional, sino una 
@@ -222,23 +222,23 @@ const Landing = () => {
 
           <div style={{ marginTop: '2rem' }}>
             <h4 style={{ color: 'var(--dark-green)', marginBottom: '1rem' }}>
-              ✅ Beneficios Ambientales y Económicos
+              Beneficios Ambientales y Económicos
             </h4>
             <ul style={{ listStyle: 'none', padding: 0 }}>
               <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center' }}>
-                <span style={{ color: 'var(--primary-green)', marginRight: '0.5rem' }}>🌿</span>
+                <span style={{ color: 'var(--primary-green)', marginRight: '0.5rem' }}><FaLeaf /></span>
                 Captura natural de CO₂ durante el crecimiento
               </li>
               <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center' }}>
-                <span style={{ color: 'var(--primary-green)', marginRight: '0.5rem' }}>💧</span>
+                <span style={{ color: 'var(--primary-green)', marginRight: '0.5rem' }}><FaWind /></span>
                 Mejora la calidad del aire local
               </li>
               <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center' }}>
-                <span style={{ color: 'var(--primary-green)', marginRight: '0.5rem' }}>💰</span>
+                <span style={{ color: 'var(--primary-green)', marginRight: '0.5rem' }}><FaBriefcase /></span>
                 Genera empleos y desarrollo económico sostenible
               </li>
               <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center' }}>
-                <span style={{ color: 'var(--primary-green)', marginRight: '0.5rem' }}>🌍</span>
+                <span style={{ color: 'var(--primary-green)', marginRight: '0.5rem' }}><FaLeaf /></span>
                 Contribuye a los Objetivos de Desarrollo Sostenible
               </li>
             </ul>
@@ -250,8 +250,8 @@ const Landing = () => {
       <section id="co2-coin" className="section">
         <h2 className="section-title">CO₂ Coin</h2>
         <div className="card">
-          <h3 style={{ color: 'var(--dark-green)', marginBottom: '1.5rem', fontSize: '1.5rem', textAlign: 'center' }}>
-            💎 Conversión de CO₂ en Tokens Digitales
+          <h3 style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', color: 'var(--dark-green)', marginBottom: '1.5rem', fontSize: '1.5rem', textAlign: 'center' }}>
+            <FaCertificate /> Conversión de CO₂ en Tokens Digitales
           </h3>
           <p style={{ textAlign: 'center', fontSize: '1.2rem', marginBottom: '2rem', color: 'var(--text-light)' }}>
             <strong>Cada CO₂ Coin representa una porción del CO₂ capturado por la caña local</strong>
@@ -259,21 +259,21 @@ const Landing = () => {
           
           <div className="card-grid">
             <div className="highlight-card">
-              <h3>👨‍🌾 Beneficios a Agricultores</h3>
+              <h3><FaHandshake /> Beneficios a Agricultores</h3>
               <p>
                 Los agricultores reciben compensación directa por su contribución 
                 ambiental, incentivando prácticas sostenibles y mejorando su calidad de vida.
               </p>
             </div>
             <div className="highlight-card">
-              <h3>📜 Certificado de Sostenibilidad</h3>
+              <h3><FaCertificate /> Certificado de Sostenibilidad</h3>
               <p>
                 Cada token viene respaldado por un certificado blockchain que 
                 garantiza la trazabilidad y autenticidad del CO₂ capturado.
               </p>
             </div>
             <div className="highlight-card">
-              <h3>🌬️ Tu Inversión Limpia el Aire</h3>
+              <h3><FaWind /> Tu Inversión Limpia el Aire</h3>
               <p>
                 Al adquirir CO₂ Coins, estás financiando directamente la captura 
                 de carbono y contribuyendo a un futuro más limpio.
@@ -287,8 +287,8 @@ const Landing = () => {
       <section id="blockchain" className="section">
         <h2 className="section-title">Blockchain (Stellar)</h2>
         <div className="card">
-          <h3 style={{ color: 'var(--dark-green)', marginBottom: '1.5rem', fontSize: '1.5rem', textAlign: 'center' }}>
-            ⛓️ Tecnología Transparente y Segura
+          <h3 style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', color: 'var(--dark-green)', marginBottom: '1.5rem', fontSize: '1.5rem', textAlign: 'center' }}>
+            <FaLock /> Tecnología Transparente y Segura
           </h3>
           <p style={{ textAlign: 'center', fontSize: '1.1rem', marginBottom: '2rem', color: 'var(--text-light)' }}>
             Utilizamos la red Stellar para garantizar transparencia, seguridad y trazabilidad completa
@@ -296,7 +296,7 @@ const Landing = () => {
           
           <div className="blockchain-features">
             <div className="feature-item">
-              <div className="feature-icon">🔍</div>
+              <div className="feature-icon"><FaSearch /></div>
               <h3 className="feature-title">Transparencia Total</h3>
               <p className="card-text">
                 Todas las transacciones son públicas y verificables en la blockchain, 
@@ -304,7 +304,7 @@ const Landing = () => {
               </p>
             </div>
             <div className="feature-item">
-              <div className="feature-icon">🔒</div>
+              <div className="feature-icon"><FaLock /></div>
               <h3 className="feature-title">Seguridad Máxima</h3>
               <p className="card-text">
                 La red Stellar utiliza criptografía avanzada para proteger 
@@ -312,7 +312,7 @@ const Landing = () => {
               </p>
             </div>
             <div className="feature-item">
-              <div className="feature-icon">📊</div>
+              <div className="feature-icon"><FaChartBar /></div>
               <h3 className="feature-title">Registro Permanente</h3>
               <p className="card-text">
                 Cada compra queda registrada de forma inmutable en Stellar, 
@@ -327,15 +327,15 @@ const Landing = () => {
             </h4>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginTop: '1rem' }}>
               <div style={{ padding: '1rem', background: 'var(--card-bg)', borderRadius: '10px' }}>
-                <strong>⚡ Velocidad</strong><br />
+                <strong><FaBolt/> Velocidad</strong><br />
                 Transacciones en segundos
               </div>
               <div style={{ padding: '1rem', background: 'var(--card-bg)', borderRadius: '10px' }}>
-                <strong>💰 Bajo Costo</strong><br />
+                <strong><FaDollarSign/> Bajo Costo</strong><br />
                 Tarifas mínimas
               </div>
               <div style={{ padding: '1rem', background: 'var(--card-bg)', borderRadius: '10px' }}>
-                <strong>🌍 Escalabilidad</strong><br />
+                <strong><FaGlobeAmericas/> Escalabilidad</strong><br />
                 Soporte global
               </div>
             </div>
@@ -348,7 +348,7 @@ const Landing = () => {
         <h2 className="section-title">Impacto Real</h2>
         <div className="impact-stats">
           <h3 style={{ textAlign: 'center', fontSize: '1.8rem', marginBottom: '1rem' }}>
-            📈 Nuestros Logros en Números
+            <FaChartBar/> Nuestros Logros en Números
           </h3>
           <p style={{ textAlign: 'center', opacity: '0.9', marginBottom: '2rem' }}>
             Proyectos alineados con los Objetivos de Desarrollo Sostenible de la ONU
@@ -376,7 +376,7 @@ const Landing = () => {
 
         <div className="card-grid" style={{ marginTop: '2rem' }}>
           <div className="card">
-            <div className="card-icon">🎯</div>
+            <div className="card-icon"><FaLeaf /></div>
             <h3 className="card-title">ODS 13: Acción por el Clima</h3>
             <p className="card-text">
               Contribuimos directamente a la reducción de emisiones de CO₂ 
@@ -384,7 +384,7 @@ const Landing = () => {
             </p>
           </div>
           <div className="card">
-            <div className="card-icon">🌱</div>
+            <div className="card-icon"><FaLeaf /></div>
             <h3 className="card-title">ODS 15: Vida de Ecosistemas</h3>
             <p className="card-text">
               Promovemos prácticas agrícolas sostenibles que protegen 
@@ -392,7 +392,7 @@ const Landing = () => {
             </p>
           </div>
           <div className="card">
-            <div className="card-icon">💼</div>
+            <div className="card-icon"><FaBriefcase /></div>
             <h3 className="card-title">ODS 8: Trabajo Decente</h3>
             <p className="card-text">
               Generamos empleos sostenibles en la comunidad agrícola 
@@ -412,10 +412,10 @@ const Landing = () => {
               en tokens digitales sostenibles para un futuro más limpio.
             </p>
             <div className="social-links">
-              <a href="#" className="social-link">📘</a>
-              <a href="#" className="social-link">🐦</a>
-              <a href="#" className="social-link">📷</a>
-              <a href="#" className="social-link">💼</a>
+              <a href="#" className="social-link" aria-label="Facebook"><FaFacebookF /></a>
+              <a href="#" className="social-link" aria-label="Twitter/X"><FaTwitter /></a>
+              <a href="#" className="social-link" aria-label="Instagram"><FaInstagram /></a>
+              <a href="#" className="social-link" aria-label="LinkedIn"><FaLinkedinIn /></a>
             </div>
           </div>
           
