@@ -5,18 +5,18 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
   color: #333;
   scroll-behavior: smooth;
 }
 
 :root {
-  --primary-green: #4CAF50;
-  --light-green: #81C784;
-  --card-bg: #A5D6A7;
-  --secondary-green: #388E3C;
-  --dark-green: #2C6B2F;
+  --primary-green: #4caf50;
+  --light-green: #81c784;
+  --card-bg: #a5d6a7;
+  --secondary-green: #388e3c;
+  --dark-green: #2c6b2f;
   --white: #ffffff;
   --light-gray: #f8f9fa;
   --text-dark: #2c3e50;
@@ -27,7 +27,11 @@ body {
 .landing-container {
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--light-gray) 0%, var(--card-bg) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--light-gray) 0%,
+    var(--card-bg) 100%
+  );
 }
 
 /* Section base styles */
@@ -48,7 +52,7 @@ body {
 }
 
 .section-title::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -10px;
   left: 50%;
@@ -61,7 +65,11 @@ body {
 
 /* Hero section */
 .hero-section {
-  background: linear-gradient(135deg, var(--dark-green) 0%, var(--secondary-green) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--dark-green) 0%,
+    var(--secondary-green) 100%
+  );
   color: var(--white);
   text-align: center;
   padding: 120px 20px;
@@ -70,7 +78,7 @@ body {
 }
 
 .hero-section::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -91,7 +99,7 @@ body {
   font-size: 3.5rem;
   font-weight: 800;
   margin-bottom: 1.5rem;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .hero-subtitle {
@@ -126,14 +134,14 @@ body {
   background: var(--white);
   border-radius: 15px;
   padding: 2rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   border: 1px solid rgba(129, 199, 132, 0.2);
 }
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
 .card-grid {
@@ -205,7 +213,11 @@ body {
 
 /* Highlight cards */
 .highlight-card {
-  background: linear-gradient(135deg, var(--primary-green) 0%, var(--light-green) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--primary-green) 0%,
+    var(--light-green) 100%
+  );
   color: var(--white);
   border-radius: 15px;
   padding: 2rem;
@@ -238,7 +250,7 @@ body {
   padding: 2rem;
   text-align: center;
   border-left: 5px solid var(--primary-green);
-  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
 }
 
 .feature-icon {
@@ -273,7 +285,7 @@ body {
 .stat-item {
   text-align: center;
   padding: 1.5rem;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 15px;
   backdrop-filter: blur(10px);
 }
@@ -316,7 +328,7 @@ body {
 
 .footer-section p,
 .footer-section a {
-  color: rgba(255,255,255,0.8);
+  color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
   line-height: 1.6;
 }
@@ -350,11 +362,11 @@ body {
 }
 
 .footer-bottom {
-  border-top: 1px solid rgba(255,255,255,0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
   margin-top: 2rem;
   padding-top: 2rem;
   text-align: center;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 /* Responsive design */
@@ -362,21 +374,21 @@ body {
   .hero-title {
     font-size: 2.5rem;
   }
-  
+
   .section-title {
     font-size: 2rem;
   }
-  
+
   .section {
     padding: 60px 15px;
   }
-  
+
   .card-grid,
   .metrics-grid,
   .blockchain-features {
     grid-template-columns: 1fr;
   }
-  
+
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -386,11 +398,11 @@ body {
   .hero-title {
     font-size: 2rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.1rem;
   }
-  
+
   .stats-grid {
     grid-template-columns: 1fr;
   }
@@ -437,4 +449,116 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--secondary-green);
+}
+
+/* ===== Fan deck carousel ===== */
+.fan-wrap {
+  position: relative;
+  margin: 7.5rem auto 1.5rem;
+  max-width: 1100px;
+}
+
+.fan {
+  position: relative;
+  width: min(100%, 1024px);
+  height: clamp(260px, 36vw, 420px);
+  margin: 0 auto;
+  perspective: 1200px;
+
+  /* control vars */
+  --sep: 0; /* 0 apilado, 1 abierto */
+  --mx: 0; /* mouse x [-1,1] */
+  --hoverBoost: 1;
+}
+
+.fan-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(180px, 24vw, 320px);
+  height: clamp(260px, 34vw, 480px);
+  transform: translate(-50%, -50%);
+  border-radius: 26px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(44, 107, 47, 0.12);
+  transition: transform 280ms ease, box-shadow 280ms ease, filter 280ms ease;
+  will-change: transform;
+  --liftY: 0px;
+  --extraX: 0px;
+}
+
+.fan-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.fan-card {
+  --baseRot: calc(var(--i) * 10deg);
+  --spreadX: calc(var(--i) * (28px + var(--sep) * 120px));
+  --followX: calc(
+    var(--mx) * var(--hoverBoost) * (12px + (abs(var(--i)) * 6px))
+  );
+  transform:
+    translate(calc(-50% + var(--spreadX) + var(--followX) + var(--extraX)),
+              calc(-50% + var(--tier) + var(--liftY)))
+    rotate(calc(var(--baseRot) + (var(--mx) * var(--hoverBoost) * -4deg)))
+    translateZ(calc((2 - var(--absI)) * 14px));
+  z-index: calc((5 - var(--absI)) * 10);
+}
+
+/* enfatiza la central en hover */
+.fan.is-inview:hover .fan-card[style*="--i: 0"] {
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.22);
+}
+
+/* responsive tweaks */
+@media (max-width: 780px) {
+  .fan {
+    height: clamp(220px, 58vw, 360px);
+  }
+  .fan-card {
+    border-radius: 22px;
+  }
+}
+
+/* accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  .fan {
+    --hoverBoost: 0;
+  }
+  .fan-card {
+    transition: none;
+  }
+}
+
+/* Hover central (i=0) */
+.fan[data-hover="0"] .fan-card[style*="--i: 0"] { --liftY: -28px; z-index: 120; }
+.fan[data-hover="0"] .fan-card[style*="--i: -1"] { --extraX: -12px; }
+.fan[data-hover="0"] .fan-card[style*="--i: 1"]  { --extraX:  12px; }
+
+/* Hover i=-1 */
+.fan[data-hover="-1"] .fan-card[style*="--i: -1"] { --liftY: -28px; --extraX: -8px; z-index: 120; }
+.fan[data-hover="-1"] .fan-card[style*="--i: -2"] { --extraX: -10px; }
+.fan[data-hover="-1"] .fan-card[style*="--i: 0"]  { --extraX:  10px; }
+
+/* Hover i=1 */
+.fan[data-hover="1"] .fan-card[style*="--i: 1"] { --liftY: -28px; --extraX: 8px; z-index: 120; }
+.fan[data-hover="1"] .fan-card[style*="--i: 0"] { --extraX: -10px; }
+.fan[data-hover="1"] .fan-card[style*="--i: 2"] { --extraX:  10px; }
+
+/* Hover i=-2 */
+.fan[data-hover="-2"] .fan-card[style*="--i: -2"] { --liftY: -26px; --extraX: -10px; z-index: 120; }
+.fan[data-hover="-2"] .fan-card[style*="--i: -1"] { --extraX:  12px; }
+
+/* Hover i=2 */
+.fan[data-hover="2"] .fan-card[style*="--i: 2"] { --liftY: -26px; --extraX: 10px; z-index: 120; }
+.fan[data-hover="2"] .fan-card[style*="--i: 1"] { --extraX: -12px; }
+
+/* Suaviza las que NO están en hover */
+.fan[data-hover] .fan-card:not([style*="--i: var(--hoverI)"]) {
+  filter: saturate(.96) contrast(.98);
 }
