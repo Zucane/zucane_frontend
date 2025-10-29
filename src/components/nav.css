@@ -1,5 +1,5 @@
 .top-navbar {
-    width: 100%;
+    min-width: 100vw;
     background: #ffffff;
     border-bottom: 1px solid #ececec;
     position: sticky;
