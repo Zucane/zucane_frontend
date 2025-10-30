@@ -127,7 +127,7 @@ const Landing = () => {
         <div className="hero-content">
           <h1 className="hero-title">CO₂ Coin</h1>
           <p className="hero-subtitle">
-            Transforma el CO₂ capturado por la caña de azúcar de Xochitepec en tokens digitales sostenibles
+            Transforma el CO₂ holaaaa capturado por la caña de azúcar de Xochitepec en tokens digitales sostenibles
           </p>
           <a href="#co2-coin" className="cta-button">
             Descubre Cómo Funciona
