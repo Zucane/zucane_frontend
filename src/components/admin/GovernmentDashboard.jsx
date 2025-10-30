@@ -36,9 +36,9 @@ const tabComponents = {
 };
 
 export default function GovernmentDashboard() {
-    const [activeTab, setActiveTab] = useState('emit');
+    const [activeTab, setActiveTab] = useState('manage');
     const [showLogoutModal, setShowLogoutModal] = useState(false);
-    const [sidebarOpen, setSidebarOpen] = useState(false); // Empieza cerrada como en el user
+    const [sidebarOpen, setSidebarOpen] = useState(false);
     const navigate = useNavigate();
 
     const handleLogout = () => setShowLogoutModal(true);
