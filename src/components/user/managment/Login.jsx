@@ -1,31 +1,60 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './styles.css';
 import './form.css';
 import granjero from '../../../assets/granjero.jpg';
 import logo from '../../../assets/logo.jpeg';
 // import { Link } from 'react-router-dom' // <- si usas React Router
 import FormFieldValidation from './FormFieldValidation';
+import apiV1 from '../../../service/apiV1';
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [submitError, setSubmitError] = useState('');
     const [validateTick, setValidateTick] = useState(0);
+    const navigate = useNavigate();
 
-    const isEmailValid = (v) => v && v.includes('@') && v.endsWith('.com');
+    const isEmailValid = (v) => {
+        if (!v) return false;
+        const value = String(v).toLowerCase();
+        return value.includes('@');
+    };
     const isPasswordValid = (v) => v && v.length >= 6;
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setSubmitError('');
         const okEmail = isEmailValid(email);
         const okPass = isPasswordValid(password);
         if (!okEmail || !okPass) {
             setSubmitError('Por favor corrige los campos marcados.');
-            setValidateTick(t => t + 1); // fuerza mostrar errores en inputs
+            setValidateTick(t => t + 1);
             return;
         }
-        alert('Inicio de sesión válido. Continuando...');
+
+        try {
+            console.log('[LOGIN] BaseURL:', apiV1?.defaults?.baseURL);
+            console.log('[LOGIN] Request payload:', { email, password: '********' });
+            const { data } = await apiV1.post('/api/v1/auth/login', { email, password });
+            console.log('[LOGIN] Response data:', data);
+            if (data && data.success) {
+                const destination = Number(data.user_id) === 4 ? '/government' : '/business';
+                console.log('[LOGIN] Success. user_id:', data.user_id, '-> navigating to', destination);
+                navigate(destination);
+            } else {
+                setSubmitError(data?.message || 'Credenciales inválidas.');
+                console.warn('[LOGIN] API responded without success flag:', data);
+            }
+        } catch (err) {
+            const status = err?.response?.status;
+            const respData = err?.response?.data;
+            const headers = err?.response?.headers;
+            console.error('[LOGIN] Error response:', { status, data: respData, headers });
+            console.error('[LOGIN] Error config:', err?.config);
+            const apiMsg = respData?.message || respData?.detail;
+            setSubmitError(apiMsg || (status === 401 ? 'No autorizado. Verifica tus credenciales.' : 'No se pudo iniciar sesión. Intenta de nuevo.'));
+        }
     };
 
     return (
@@ -67,6 +96,7 @@ export default function Login() {
                                     wrapClassName="form-field"
                                     inputClassName="login-input"
                                     validateSignal={validateTick}
+                                    suppressValidation={true}
                                 />
                             </div>
 
@@ -84,6 +114,7 @@ export default function Login() {
                                     wrapClassName="form-field"
                                     inputClassName="login-input"
                                     validateSignal={validateTick}
+                                    suppressValidation={true}
                                 />
                                 <small id="password-hint" className="password-hint">
                                     ¿Olvidaste tu contraseña?
