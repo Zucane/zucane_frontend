@@ -9,7 +9,7 @@ export default function TopNavBar() {
     const [open, setOpen] = useState(false);
 
     const itemsCenter = [
-        { label: 'Problema', to: '/problema' },
+        { label: 'Problema', to: '/problem' },
         { label: 'Solución', to: '/solution' },
         { label: 'Usuario', to: '/contact' },
         { label: 'Propuesta', to: '/proposal' },
