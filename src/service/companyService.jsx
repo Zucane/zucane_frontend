@@ -5,7 +5,3 @@ export const getCompany = async (empresa_id) => {
     return response.data;
 };
 
-export const getCompanies = async () => {
-    const response = await apiV1.get('/api/v1/empresas');
-    return response.data;
-};
