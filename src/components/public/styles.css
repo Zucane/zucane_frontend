@@ -1183,3 +1183,108 @@ html { overflow-x: hidden; }
 }
 .rm-info h4{ margin:0; color:var(--dark-green); font-size:1rem; text-align:center }
 .rm-info p{ margin:2px 0 0; color:var(--text-light); font-size:.9rem; text-align:center }
+
+/* ===== Team ===== */
+.team-bg{
+  background: radial-gradient(1100px 480px at 50% -180px, rgba(129,199,132,.16), transparent 60%),
+              var(--light-gray);
+}
+.team-hero{ padding: clamp(90px,10vw,150px) 24px 36px; max-width:1100px; margin:0 auto; text-align:center; }
+.team-title{ font-size:clamp(2.2rem,4.6vw,3.2rem); color:var(--dark-green); margin:0; }
+.team-underline{ width:92px; height:6px; margin:14px auto 18px; background:linear-gradient(90deg, var(--primary-green), var(--light-green)); border-radius:999px; }
+.team-sub{ color:var(--text-light); font-size:clamp(1rem,2vw,1.15rem); max-width:900px; margin:0 auto 10px; }
+
+/* Reusa tus solution-badges + animación secuencial ya añadida */
+.team-badges .solution-badge:nth-child(1){ animation-delay:.05s }
+.team-badges .solution-badge:nth-child(2){ animation-delay:.15s }
+.team-badges .solution-badge:nth-child(3){ animation-delay:.25s }
+.team-badges .solution-badge:nth-child(4){ animation-delay:.35s }
+
+/* Grid de equipo con forma 3 arriba y 2 intercaladas abajo */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* más control */
+  gap: 1.8rem;
+  justify-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Primera fila: ocupa columnas 1–2, 3–4, 5–6 (3 cards) */
+.team-card:nth-child(1) { grid-column: 1 / span 2; }
+.team-card:nth-child(2) { grid-column: 3 / span 2; }
+.team-card:nth-child(3) { grid-column: 5 / span 2; }
+
+/* Segunda fila intercalada: */
+.team-card:nth-child(4) { grid-column: 2 / span 2; } /* centrada entre 1 y 2 */
+.team-card:nth-child(5) { grid-column: 4 / span 2; } /* centrada entre 2 y 3 */
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Card */
+.team-card{
+  background:#fff;
+  border:1px solid rgba(129,199,132,.25);
+  border-radius:16px;
+  padding:18px 16px 14px;
+  text-align:center;
+  box-shadow:0 10px 24px rgba(0,0,0,.06);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.team-card:hover{
+  transform: translateY(-6px);
+  box-shadow:0 18px 40px rgba(76,175,80,.22);
+}
+
+/* Avatar con iniciales */
+.team-avatar{
+  width:88px; height:88px; border-radius:50%;
+  margin: 6px auto 10px;
+  background: radial-gradient(circle at 35% 30%, #fff 0 38%, var(--card-bg) 40% 100%);
+  display:grid; place-items:center;
+  color:var(--dark-green);
+  font-weight:800; font-size:1.6rem;
+  box-shadow: inset 0 0 0 6px rgba(255,255,255,.7), 0 10px 24px rgba(0,0,0,.08);
+}
+.team-name{ margin:6px 0 0; color:var(--dark-green) }
+.team-role{ margin:2px 0 10px; color:var(--text-light); font-weight:600 }
+
+/* Tags */
+.team-tags{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:10px; }
+.team-tag{
+  padding:4px 10px; border-radius:999px; font-size:.82rem; font-weight:700;
+  background:rgba(76,175,80,.10); border:1px dashed rgba(44,107,47,.2); color:var(--text-dark);
+}
+
+/* Links */
+.team-links{ display:flex; gap:14px; justify-content:center; }
+.team-links a, .team-link-disabled{
+  width:36px; height:36px; border-radius:50%; display:grid; place-items:center;
+  background:var(--card-bg); color:var(--dark-green);
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+}
+.team-links a:hover{
+  transform: translateY(-3px);
+  background:var(--primary-green); color:#fff;
+  box-shadow:0 12px 26px rgba(76,175,80,.28);
+}
+.team-link-disabled{ opacity:.45; cursor:not-allowed; }
+
+/* Manifiesto */
+.team-callout{
+  background:var(--light-green);
+  color:#444; border-radius:16px; padding:18px 20px;
+  border:1px solid rgba(255,255,255,.35);
+  text-align:center; box-shadow:0 16px 38px rgba(76,175,80,.28);
+}
+.team-callout p{ margin:0; font-size:1.05rem; }
