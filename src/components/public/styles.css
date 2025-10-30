@@ -839,7 +839,8 @@ html { overflow-x: hidden; }
 
 /* Badges */
 .users-badges {
-  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 8px;
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  margin-top: 8px;
 }
 .users-badge {
   display: inline-flex; align-items: center; gap: 8px;
@@ -909,7 +910,6 @@ html { overflow-x: hidden; }
   .u-connector { display: none; }
 }
 
-/* ===== Timeline ===== */
 .u-timeline {
   position: relative;
   max-width: 1100px;
@@ -1024,4 +1024,117 @@ html { overflow-x: hidden; }
 @media (max-width: 680px) {
   .u-timeline { grid-template-columns: 1fr; row-gap: 18px; }
   .u-timeline-line { display: none; } /* se ve más limpio en vertical */
+}
+
+/* Fondo y hero */
+.vp-bg { background: #eaefed;}
+
+.vp-hero {
+  padding: clamp(90px, 10vw, 150px) 24px 40px;
+  max-width: 1100px; margin: 0 auto; text-align: center;
+}
+.vp-title {
+  font-size: clamp(2.2rem, 4.6vw, 3.2rem);
+  line-height: 1.1; color: var(--dark-green); margin: 0;
+}
+.vp-underline {
+  width: 92px; height: 6px; margin: 14px auto 18px;
+  background: linear-gradient(90deg, var(--primary-green), var(--light-green));
+  border-radius: 999px;
+}
+.vp-sub {
+  color: var(--text-light);
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  max-width: 880px; margin: 0 auto 18px;
+}
+
+/* Badges con animación */
+.vp-badges {
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+/* Grid 2×2 */
+.vp-grid{
+  display:grid; grid-template-columns:repeat(2,1fr);
+  gap:2rem; margin-top:2rem;
+}
+@media (max-width: 900px){ .vp-grid{ grid-template-columns:1fr; } }
+.vp-card{ height:100%; }
+
+/* Diferenciadores en fila/auto-wrap */
+.vp-punch{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:1rem; margin-top:1rem;
+}
+.vp-punch-item{
+  display:flex; align-items:center; gap:.6rem;
+  background: var(--white);
+  border:1px solid rgba(129,199,132,.25);
+  border-radius:12px; padding:12px 14px;
+  box-shadow:0 10px 24px rgba(0,0,0,.06);
+}
+.vp-punch-item svg{ color:var(--primary-green); }
+
+.vp-unique{
+  margin-top:1.2rem;
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid rgba(129,199,132,.28);
+  box-shadow:0 12px 32px rgba(0,0,0,.08);
+  background: linear-gradient(180deg,#fff,rgba(255,255,255,.96));
+}
+.vp-unique-head,.vp-unique-row{
+  display:grid; grid-template-columns: 1.2fr 1fr 1fr;
+  align-items:center;
+}
+.vp-unique-head{
+  background:linear-gradient(90deg, rgba(165,214,167,.22), rgba(129,199,132,.18));
+  font-weight:700; color:var(--dark-green);
+}
+.vp-unique-head .col{ padding:14px 18px; }
+.vp-unique-head .col-bad{ text-align:center; }
+.vp-unique-head .col-good{ text-align:center; }
+
+.vp-unique-row{ position:relative; }
+.vp-unique-row:not(:last-child){ border-bottom:1px dashed rgba(44,107,47,.16); }
+.vp-unique-row > div{ padding:16px 18px; }
+
+.vp-unique .feat{
+  display:flex; align-items:center; gap:.6rem; font-weight:600; color:var(--text-dark);
+}
+.vp-unique .feat-dot{
+  width:10px; height:10px; border-radius:50%;
+  background:var(--primary-green);
+  box-shadow:0 0 0 4px rgba(76,175,80,.14);
+}
+
+.vp-unique .bad{
+  color:#8b4c4c;
+  background: linear-gradient(180deg, rgba(255,236,236,.9), rgba(255,255,255,.8));
+  border-left:1px solid rgba(200,100,100,.25);
+  text-align:center;
+}
+.vp-unique .good{
+  color:#1f6b2a;
+  background: linear-gradient(180deg, rgba(218,247,223,.85), rgba(255,255,255,.85));
+  border-left:1px solid rgba(76,175,80,.25);
+  text-align:center;
+}
+
+.vp-unique .tag{
+  display:inline-block; margin-right:6px; padding:2px 8px;
+  border-radius:999px; background:rgba(76,175,80,.15);
+  border:1px solid rgba(76,175,80,.35); font-weight:700; font-size:.85rem;
+}
+
+/* hover fila: resalta */
+.vp-unique-row:hover{
+  background:linear-gradient(90deg, rgba(165,214,167,.10), transparent 30%, transparent 70%, rgba(165,214,167,.10));
+}
+
+/* responsive */
+@media (max-width: 900px){
+  .vp-unique-head,.vp-unique-row{ grid-template-columns: 1fr; }
+  .vp-unique .bad,.vp-unique .good{ text-align:left; border-left:none; }
 }
