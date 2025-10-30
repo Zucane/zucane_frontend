@@ -9,18 +9,18 @@ export default function TopNavBar() {
     const [open, setOpen] = useState(false);
 
     const itemsCenter = [
-        { label: 'Problema', to: '/services' },
-        { label: 'Solución', to: '/about' },
-        { label: 'Usuario', to: '/contact' },
+        { label: 'Problema', to: '/problem' },
+        { label: 'Solución', to: '/solution' },
+        { label: 'Usuario', to: '/user' },
         { label: 'Propuesta', to: '/proposal' },
         { label: 'Impacto', to: '/impact' },
         { label: 'Equipo', to: '/team' },
     ];
     const login = [
-        { label: 'Iniciar', to: '/login' },
+        { label: 'Iniciar Sesión', to: '/login' },
     ];
     const register = [
-        { label: 'Registrar', to: '/register' },
+        { label: 'Registrarse', to: '/register' },
     ];
 
     const isActive = (to) => location.pathname === to;

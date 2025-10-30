@@ -1,49 +1,88 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { FaUserTie, FaIndustry, FaEnvelope, FaMapMarkerAlt, FaCalendarAlt, FaIdCard, FaPhoneAlt, FaClipboardCheck } from 'react-icons/fa';
+import { getCompany } from '../../../service/companyService'; // Asegúrate de importar el método getCompany
 
-const companyData = {
-  nombre: 'Azúcar Bonanza S.A. de C.V.',
-  email: 'contacto@azucarbonanza.com',
-  industria: 'Agroindustria / Azucarera',
-  rfc: 'ABO980312H12',
-  direccion: 'Carretera 80 Km 12, Veracruz, México',
-  fechaRegistro: '2024-04-12',
-  representante: 'Laura Mendoza',
-};
+const empresa_id = 7; // El ID de la empresa que vamos a usar
 
 export default function Company() {
+  const [companyData, setCompanyData] = useState(null); // Estado para los datos de la empresa
+
+  // Llamar a getCompany cuando el componente se monta
+  useEffect(() => {
+    const fetchCompanyData = async () => {
+      try {
+        const data = await getCompany(empresa_id); // Llamada a la API para obtener los datos de la empresa
+        setCompanyData(data); // Guardamos los datos en el estado
+      } catch (error) {
+        console.error("Error al obtener los datos de la empresa:", error);
+      }
+    };
+
+    fetchCompanyData(); // Ejecutar la función al montar el componente
+  }, []); // Solo ejecuta una vez al montar el componente
+
+  // Si los datos no están disponibles, mostrar "Cargando..."
+  if (!companyData) {
+    return <div>Cargando...</div>;
+  }
+
   return (
     <section className="dashboard-section">
       <h1 className="dashboard-title">Mi Empresa</h1>
-      <form className="profile-form">
-        <div className="profile-form-row">
-          <label htmlFor="nombre">Nombre de la Empresa</label>
-          <input id="nombre" type="text" value={companyData.nombre} disabled />
+
+      <div className="profile-card">
+        {/* === Sección de Imagen de Perfil (Wireframe) === */}
+        <div className="profile-image-container">
+          <div className="profile-wireframe">
+            {/* Placeholder visual para el logo o imagen de la empresa */}
+            
+          </div>
+          <h2 className="card-company-name">{companyData.nombre}</h2>
         </div>
-        <div className="profile-form-row">
-          <label htmlFor="industria">Industria</label>
-          <input id="industria" type="text" value={companyData.industria} disabled />
-        </div>
-        <div className="profile-form-row">
-          <label htmlFor="rfc">RFC</label>
-          <input id="rfc" type="text" value={companyData.rfc} disabled />
-        </div>
-        <div className="profile-form-row">
-          <label htmlFor="representante">Representante Legal</label>
-          <input id="representante" type="text" value={companyData.representante} disabled />
-        </div>
-        <div className="profile-form-row">
-          <label htmlFor="email">Correo de contacto</label>
-          <input id="email" type="email" value={companyData.email} disabled />
-        </div>
-        <div className="profile-form-row">
-          <label htmlFor="direccion">Dirección fiscal</label>
-          <input id="direccion" type="text" value={companyData.direccion} disabled />
-        </div>
-        <div className="profile-form-row">
-          <label htmlFor="fechaRegistro">Fecha de registro</label>
-          <input id="fechaRegistro" type="text" value={companyData.fechaRegistro} disabled />
-        </div>
-      </form>
+
+        <hr className="divider" />
+
+        {/* === Sección de Datos Centrados === */}
+        <dl className="company-data-list">
+
+          {/* Fila: RFC */}
+          <div className="data-row">
+            <dt><FaIdCard className="data-icon" /> RFC:</dt>
+            <dd>{companyData.rfc}</dd>
+          </div>
+
+          {/* Fila: Email */}
+          <div className="data-row">
+            <dt><FaEnvelope className="data-icon" /> Correo:</dt>
+            <dd>{companyData.email}</dd>
+          </div>
+
+          {/* Fila: Teléfono */}
+          <div className="data-row">
+            <dt><FaPhoneAlt className="data-icon" /> Teléfono:</dt>
+            <dd>{companyData.telefono || 'No disponible'}</dd>
+          </div>
+
+          {/* Fila: Dirección */}
+          <div className="data-row">
+            <dt><FaMapMarkerAlt className="data-icon" /> Dirección:</dt>
+            <dd>{companyData.direccion}</dd>
+          </div>
+
+          {/* Fila: Fecha de Registro */}
+          <div className="data-row">
+            <dt><FaCalendarAlt className="data-icon" /> Registro:</dt>
+            <dd>{companyData.registro_fecha}</dd>
+          </div>
+
+          {/* Fila: Status */}
+          <div className="data-row">
+            <dt><FaClipboardCheck className="data-icon" /> Estado:</dt>
+            <dd>{companyData.status}</dd>
+          </div>
+        </dl>
+
+      </div>
     </section>
   );
 }

@@ -2,8 +2,9 @@
     min-width: 100vw;
     background: #ffffff;
     border-bottom: 1px solid #ececec;
-    position: sticky;
+    padding: 0.6rem 1rem;
     top: 0;
+    height: 10vh;
     z-index: 1000;
     font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
@@ -34,7 +35,7 @@
 
 .top-nav {
     display: flex;
-    gap: 8px;
+    gap: 12px;
     align-items: center;
 }
 
@@ -71,11 +72,11 @@
 }
 
 .top-link:hover {
-    background: rgba(11, 95, 255, 0.06);
+    background: rgba(44, 107, 47, 0.2);
 }
 
 .top-link.active {
-    color: #0b5fff;
+    color: var(--secondary-green);
     font-weight: 700;
 }
 

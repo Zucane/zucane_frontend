@@ -75,7 +75,6 @@ const Landing = () => {
     };
   }, [xochiInView]);
 
-  // Seguimiento del mouse (solo en vista y si no hay reduce-motion)
   useEffect(() => {
     const el = fanRef.current;
     if (!el) return;
@@ -111,7 +110,7 @@ const Landing = () => {
   ].map((it) => ({
     ...it,
     absI: Math.abs(it.i),
-    tier: (Math.abs(it.i) * 8) * -1, // baja un poco las laterales
+    tier: (Math.abs(it.i) * 8) * -1,
   }));
 
   return (
@@ -122,10 +121,9 @@ const Landing = () => {
         style={{ transform: `scaleX(${scrollProgress / 100})` }}
       />
 
-      {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-content">
-          <h1 className="hero-title">CO₂ Coin</h1>
+          <h1 className="hero-title">Zucoin</h1>
           <p className="hero-subtitle">
             Transforma el CO₂ capturado por la caña de azúcar de Xochitepec en tokens digitales sostenibles
           </p>
@@ -135,7 +133,6 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Section 1: ¿Qué es Xochitepec? */}
       <section id="xochitepec" className="section">
         <h2 className="section-title">¿Qué es Xochitepec?</h2>
         <div className="card-grid">
@@ -168,7 +165,6 @@ const Landing = () => {
           </div>
         </div>
 
-        {/* Fan deck carousel */}
         <div className="fan-wrap">
         <div
             ref={fanRef}
@@ -247,15 +243,14 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Section 3: CO₂ Coin */}
       <section id="co2-coin" className="section">
-        <h2 className="section-title">CO₂ Coin</h2>
+        <h2 className="section-title">ZuCoin</h2>
         <div className="card">
           <h3 style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', color: 'var(--dark-green)', marginBottom: '1.5rem', fontSize: '1.5rem', textAlign: 'center' }}>
             <FaCertificate /> Conversión de CO₂ en Tokens Digitales
           </h3>
           <p style={{ textAlign: 'center', fontSize: '1.2rem', marginBottom: '2rem', color: 'var(--text-light)' }}>
-            <strong>Cada CO₂ Coin representa una porción del CO₂ capturado por la caña local</strong>
+            <strong>Cada ZuCoin representa una porción del CO₂ capturado por la caña local</strong>
           </p>
           
           <div className="card-grid">
@@ -276,7 +271,7 @@ const Landing = () => {
             <div className="highlight-card">
               <h3><FaWind /> Tu Inversión Limpia el Aire</h3>
               <p>
-                Al adquirir CO₂ Coins, estás financiando directamente la captura 
+                Al adquirir ZuCoins, estás financiando directamente la captura 
                 de carbono y contribuyendo a un futuro más limpio.
               </p>
             </div>
@@ -284,7 +279,6 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Section 4: Blockchain (Stellar) */}
       <section id="blockchain" className="section">
         <h2 className="section-title">Blockchain (Stellar)</h2>
         <div className="card">
@@ -301,7 +295,7 @@ const Landing = () => {
               <h3 className="feature-title">Transparencia Total</h3>
               <p className="card-text">
                 Todas las transacciones son públicas y verificables en la blockchain, 
-                garantizando la confianza en cada CO₂ Coin.
+                garantizando la confianza en cada ZuCoin.
               </p>
             </div>
             <div className="feature-item">
