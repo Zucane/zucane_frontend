@@ -9,16 +9,18 @@ export default function TopNavBar() {
     const [open, setOpen] = useState(false);
 
     const itemsCenter = [
-        { label: 'Inicio', to: '/' },
         { label: 'Problema', to: '/services' },
         { label: 'Solución', to: '/about' },
         { label: 'Usuario', to: '/contact' },
-        { label: 'Propuesta', to: '/propuesta' },
-        { label: 'Impacto', to: '/impacto' },
+        { label: 'Propuesta', to: '/proposal' },
+        { label: 'Impacto', to: '/impact' },
+        { label: 'Equipo', to: '/team' },
     ];
-    const itemsRight = [
+    const login = [
         { label: 'Iniciar', to: '/login' },
-        { label: 'Register', to: '/register' },
+    ];
+    const register = [
+        { label: 'Registrar', to: '/register' },
     ];
 
     const isActive = (to) => location.pathname === to;
@@ -32,7 +34,7 @@ export default function TopNavBar() {
                     role="button"
                     tabIndex={0}
                 >
-                    <img src={logo} alt="Logo" style={{ width: '70px' }}/>
+                    <img src={logo} alt="Logo" style={{ width: '70px' }} />
                 </a>
 
                 <button
@@ -56,11 +58,20 @@ export default function TopNavBar() {
                     ))}
                 </nav>
                 <nav className={`top-nav right-nav`}>
-                    {itemsRight.map(i => (
+                    {login.map(i => (
                         <button
                             key={i.to}
                             onClick={() => { setOpen(false); navigate(i.to); }}
-                            className={`top-link ${isActive(i.to) ? 'active' : ''}`}
+                            className={`top-link-login ${isActive(i.to) ? 'active' : ''}`}
+                        >
+                            {i.label}
+                        </button>
+                    ))}
+                    {register.map(i => (
+                        <button
+                            key={i.to}
+                            onClick={() => { setOpen(false); navigate(i.to); }}
+                            className={`top-link-register ${isActive(i.to) ? 'active' : ''}`}
                         >
                             {i.label}
                         </button>
