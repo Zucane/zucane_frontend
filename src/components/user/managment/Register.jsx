@@ -1,43 +1,65 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './form.css';
 import FormFieldValidation from './FormFieldValidation';
+import apiV1 from '../../../service/apiV1';
 
 export default function Register() {
-    const [acceptedTerms, setAcceptedTerms] = useState(false);
+    const [rfc, setRfc] = useState('');
+    const [nombre, setNombre] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [telefono, setTelefono] = useState('');
+    const [direccion, setDireccion] = useState('');
     const [submitError, setSubmitError] = useState('');
+    const [submitOk, setSubmitOk] = useState('');
     const [validateTick, setValidateTick] = useState(0);
+    const navigate = useNavigate();
 
-    const isEmailValid = (v) => v && v.includes('@') && v.endsWith('.com');
+    const isEmailValid = (v) => v && v.includes('@');
     const isPasswordValid = (v) => v && v.length >= 6;
-    const isConfirmValid = (a, b) => a && b && a === b;
+    const isRfcValid = (v) => v && (v.length === 12 || v.length === 13);
+    const isNombreValid = (v) => v && v.trim().length > 1;
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setSubmitError('');
-        const okEmail = isEmailValid(email);
-        const okPass = isPasswordValid(password);
-        const okConfirm = isConfirmValid(confirmPassword, password);
-        const okTerms = acceptedTerms;
-        if (!okEmail || !okPass || !okConfirm || !okTerms) {
-            setSubmitError('Por favor corrige los campos marcados.');
-            setValidateTick(t => t + 1); // fuerza mostrar errores en inputs
+        setSubmitOk('');
+        const ok = isEmailValid(email) && isPasswordValid(password) && isRfcValid(rfc) && isNombreValid(nombre);
+        if (!ok) {
+            setSubmitError('Por favor completa RFC (12-13), nombre, email y contraseña.');
+            setValidateTick(t => t + 1);
             return;
         }
-        alert('Registro válido. Continuando...');
+
+        try {
+            const payload = { rfc, nombre, email, password, telefono, direccion };
+            const { data, status } = await apiV1.post('/api/v1/empresas/', payload);
+            if (status === 201 || data?.empresa_id) {
+                setSubmitOk('Empresa creada correctamente. Redirigiendo al inicio de sesión...');
+                setTimeout(() => navigate('/login'), 1500);
+            } else {
+                setSubmitError('No se pudo crear la empresa. Intenta de nuevo.');
+            }
+        } catch (err) {
+            const apiMsg = err?.response?.data?.message || err?.response?.data?.detail;
+            setSubmitError(apiMsg || 'Error al crear empresa.');
+        }
     };
 
     return (
         <div className="login-container">
             <div className="login-form-section register-wide">
-                <h2 className="register-title">Obtén tu cuenta y empieza a cuidar el medio ambiente</h2>
+                <h2 className="register-title">Crear empresa</h2>
                 <p className="register-subtitle">Para empezar, ingresa los siguientes datos</p>
                 <form onSubmit={handleSubmit}>
                     <div className="form-field">
-                        <label className="login-label" htmlFor="name">Nombre de empresa</label>
-                        <input className="login-input" type="text" id="name" placeholder="Tu empresa..." />
+                        <label className="login-label" htmlFor="rfc">RFC</label>
+                        <input className="login-input" type="text" id="rfc" value={rfc} onChange={(e)=>setRfc(e.target.value.toUpperCase())} placeholder="RFC de 12 o 13 caracteres" />
+                    </div>
+                    <div className="form-field">
+                        <label className="login-label" htmlFor="nombre">Nombre</label>
+                        <input className="login-input" type="text" id="nombre" value={nombre} onChange={(e)=>setNombre(e.target.value)} placeholder="Nombre de la empresa" />
                     </div>
                     <div className="form-field">
                         <label className="login-label" htmlFor="email">Correo electrónico</label>
@@ -46,13 +68,14 @@ export default function Register() {
                             name="email"
                             value={email}
                             onChange={(e)=>setEmail(e.target.value)}
-                            placeholder="tucorreo@ejemplo.com"
+                            placeholder="empresa@ejemplo.com"
                             autoComplete="email"
                             required
                             renderLabel={false}
                             wrapClassName="form-field"
                             inputClassName="login-input"
                             validateSignal={validateTick}
+                            suppressValidation={true}
                         />
                     </div>
                     <div className="form-field">
@@ -62,59 +85,37 @@ export default function Register() {
                             name="password"
                             value={password}
                             onChange={(e)=>setPassword(e.target.value)}
-                            placeholder="Contraseña segura"
+                            placeholder="Contraseña"
                             autoComplete="new-password"
                             required
                             renderLabel={false}
                             wrapClassName="form-field"
                             inputClassName="login-input"
                             validateSignal={validateTick}
+                            suppressValidation={true}
                         />
                     </div>
                     <div className="form-field">
-                        <label className="login-label" htmlFor="confirm_password">Confirmar contraseña</label>
-                        <FormFieldValidation
-                            type="password"
-                            name="confirmPassword"
-                            value={confirmPassword}
-                            compareValue={password}
-                            onChange={(e)=>setConfirmPassword(e.target.value)}
-                            placeholder="Repite tu contraseña"
-                            autoComplete="new-password"
-                            required
-                            renderLabel={false}
-                            wrapClassName="form-field"
-                            inputClassName="login-input"
-                            validateSignal={validateTick}
-                        />
+                        <label className="login-label" htmlFor="telefono">Teléfono (opcional)</label>
+                        <input className="login-input" type="text" id="telefono" value={telefono} onChange={(e)=>setTelefono(e.target.value)} placeholder="Teléfono" />
                     </div>
                     <div className="form-field">
-                        <label className="login-label" htmlFor="fiscal">Datos fiscales (opcional)</label>
-                        <input className="login-input" type="text" id="fiscal" placeholder="RFC, dirección, etc." />
-                    </div>
-                    <div className="form" style={{ flexDirection: 'row', alignItems: 'center', marginBottom: '.7rem' }}>
-                        <input
-                            type="checkbox"
-                            id="terms"
-                            checked={acceptedTerms}
-                            onChange={e => setAcceptedTerms(e.target.checked)}
-                            style={{ marginRight: '8px', width: '18px', height: '18px' }}
-                        />
-                        <label className="login-label" htmlFor="terms" style={{ fontWeight: 400 }}>
-                            Acepto los <a href="/terms" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--brand-500)', textDecoration: 'underline' }}>términos y condiciones</a>
-                        </label>
+                        <label className="login-label" htmlFor="direccion">Dirección (opcional)</label>
+                        <input className="login-input" type="text" id="direccion" value={direccion} onChange={(e)=>setDireccion(e.target.value)} placeholder="Dirección" />
                     </div>
 
                     {submitError && (
                         <div className="form-error-msg" style={{ marginBottom: '10px' }}>{submitError}</div>
                     )}
+                    {submitOk && (
+                        <div className="form-success-msg" style={{ marginBottom: '10px' }}>{submitOk}</div>
+                    )}
 
                     <button
                         className="login-button"
                         type="submit"
-                        disabled={!acceptedTerms}
                     >
-                        Registrarse
+                        Crear empresa
                     </button>
                 </form>
             </div>
