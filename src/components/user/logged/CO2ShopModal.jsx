@@ -63,7 +63,7 @@ export default function CO2ShopModal({ isOpen, onClose, onConfirm }) {
           </div>
 
           <div className="input-group">
-            <label htmlFor="privateKey">Business Private Key</label>
+            <label htmlFor="privateKey">LLave privada </label>
             <input
               id="privateKey"
               className="login-input"
