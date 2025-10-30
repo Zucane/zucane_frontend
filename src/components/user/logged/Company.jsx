@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaIndustry, FaEnvelope, FaMapMarkerAlt, FaCalendarAlt, FaIdCard, FaUserTie } from 'react-icons/fa';
 
 const companyData = {
   nombre: 'Azúcar Bonanza S.A. de C.V.',
@@ -14,36 +15,56 @@ export default function Company() {
   return (
     <section className="dashboard-section">
       <h1 className="dashboard-title">Mi Empresa</h1>
-      <form className="profile-form">
-        <div className="profile-form-row">
-          <label htmlFor="nombre">Nombre de la Empresa</label>
-          <input id="nombre" type="text" value={companyData.nombre} disabled />
+
+      <div className="profile-card">
+
+        {/* === Sección de Imagen de Perfil (Wireframe) === */}
+        <div className="profile-image-container">
+          <div className="profile-wireframe">
+            {/* Placeholder visual para el logo o imagen de la empresa */}
+            <FaIndustry size={60} color="#6b7280" />
+          </div>
+          <h2 className="card-company-name">{companyData.nombre}</h2>
+          <p className="card-industry">{companyData.industria}</p>
         </div>
-        <div className="profile-form-row">
-          <label htmlFor="industria">Industria</label>
-          <input id="industria" type="text" value={companyData.industria} disabled />
-        </div>
-        <div className="profile-form-row">
-          <label htmlFor="rfc">RFC</label>
-          <input id="rfc" type="text" value={companyData.rfc} disabled />
-        </div>
-        <div className="profile-form-row">
-          <label htmlFor="representante">Representante Legal</label>
-          <input id="representante" type="text" value={companyData.representante} disabled />
-        </div>
-        <div className="profile-form-row">
-          <label htmlFor="email">Correo de contacto</label>
-          <input id="email" type="email" value={companyData.email} disabled />
-        </div>
-        <div className="profile-form-row">
-          <label htmlFor="direccion">Dirección fiscal</label>
-          <input id="direccion" type="text" value={companyData.direccion} disabled />
-        </div>
-        <div className="profile-form-row">
-          <label htmlFor="fechaRegistro">Fecha de registro</label>
-          <input id="fechaRegistro" type="text" value={companyData.fechaRegistro} disabled />
-        </div>
-      </form>
+
+        <hr className="divider" />
+
+        {/* === Sección de Datos Centrados === */}
+        <dl className="company-data-list">
+
+          {/* Fila: RFC */}
+          <div className="data-row">
+            <dt><FaIdCard className="data-icon" /> RFC:</dt>
+            <dd>{companyData.rfc}</dd>
+          </div>
+
+          {/* Fila: Representante */}
+          <div className="data-row">
+            <dt><FaUserTie className="data-icon" /> Representante:</dt>
+            <dd>{companyData.representante}</dd>
+          </div>
+
+          {/* Fila: Email */}
+          <div className="data-row">
+            <dt><FaEnvelope className="data-icon" /> Correo:</dt>
+            <dd>{companyData.email}</dd>
+          </div>
+
+          {/* Fila: Dirección */}
+          <div className="data-row">
+            <dt><FaMapMarkerAlt className="data-icon" /> Dirección:</dt>
+            <dd>{companyData.direccion}</dd>
+          </div>
+
+          {/* Fila: Fecha de Registro */}
+          <div className="data-row">
+            <dt><FaCalendarAlt className="data-icon" /> Registro:</dt>
+            <dd>{companyData.fechaRegistro}</dd>
+          </div>
+        </dl>
+
+      </div>
     </section>
   );
 }
