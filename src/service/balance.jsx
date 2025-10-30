@@ -7,7 +7,7 @@ export const getAssetBalance = async () => {
 
 export const getBusinessBalance = async (accountPublicKey) => {
     try {
-        const url = `/api/business/balance?account_public_key=${accountPublicKey}`;
+        const url = `/api/account/balance?account_public_key=${accountPublicKey}`;
         const response = await api.get(url);
         return response.data;
     } catch (error) {
