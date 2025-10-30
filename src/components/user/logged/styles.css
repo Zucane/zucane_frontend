@@ -1,76 +1,539 @@
-/* === DASHBOARD Y MODALES === */
-.dashboard-main {
-    min-height: 100vh;
-    background: linear-gradient(135deg, var(--light-gray) 0%, var(--card-bg) 100%);
-    font-family: var(--font-brand, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif);
+:root {
+    /* Layout */
+    --rail-w: 72px;
+    --open-w: 240px;
+
+    /* Colores (mapea a tu paleta existente) */
+    --bg: var(--white);
+    --line: var(--card-bg);
+    --txt: var(--dark-green);
+    --txt-muted: #6b7280;
+
+    --brand: var(--primary-green);
+    --brand-700: var(--dark-green);
+
+    /* Estética */
+    --radius: 14px;
+    --shadow: 7px 0 18px -6px #4caf501a;
 }
 
-.dashboard-content {
-    display: flex;
-    min-height: calc(100vh - 70px);
+/* ========== Backdrop móvil (opcional) ========== */
+.sidenav-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .25);
+    backdrop-filter: saturate(120%) blur(1px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s ease;
+    z-index: 1499;
 }
 
-.dashboard-section {
-    flex: 1;
-    padding: 40px 24px;
+.sidenav-backdrop.show {
+    opacity: 1;
+    pointer-events: auto;
 }
 
-.right-navbar {
-    width: 220px;
-    background: var(--white);
-    border-left: 2px solid var(--card-bg);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding-top: 50px;
-    gap: 24px;
-    box-shadow: -7px 0 15px -5px #4caf5022
-}
-
-.right-navbar-item {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    font-size: 1.15rem;
-    color: var(--dark-green);
-    border-radius: 12px 0 0 12px;
-    padding: 13px 18px;
-    cursor: pointer;
-    transition: background .15s;
-}
-
-.right-navbar-item.active,
-.right-navbar-item:hover {
-    background: var(--card-bg);
-    color: var(--primary-green);
-}
-
-.modal-backdrop {
+/* ========== Contenedor ========== */
+.sidenav {
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(44, 107, 47, 0.09);
+    height: 100vh;
+    width: var(--rail-w);
+    background: var(--bg);
+    border-right: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    z-index: 1500;
+    transition: width .22s ease;
+    -webkit-tap-highlight-color: transparent;
+    /* quita flash negro en touch */
+}
+
+.sidenav.open {
+    width: var(--open-w);
+}
+
+/* ========== Header + Toggle ========== */
+.sidenav-header {
     display: flex;
     align-items: center;
+    gap: 10px;
+    height: 64px;
+    padding: 0 12px;
+}
+
+.sidenav-toggle {
+    width: 44px;
+    height: 44px;
+    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
-    z-index: 2000;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #fff;
+    color: var(--txt);
+    cursor: pointer;
+    outline: none;
+    transition: background .15s ease, transform .06s ease, box-shadow .2s ease, border-color .15s ease;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.modal-content {
-    background: var(--white);
-    padding: 2.5rem 2rem;
-    border-radius: 20px;
-    box-shadow: var(--shadow-md, 0 10px 30px rgba(0, 0, 0, .12));
-    min-width: 340px;
-    max-width: 90vw;
-    text-align: center;
+.sidenav-toggle:hover {
+    background: #fafafa;
 }
 
-.modal-actions {
+.sidenav-toggle:active {
+    transform: translateY(1px);
+}
+
+/* Focus accesible (sin borde negro del UA) */
+.sidenav-toggle:focus {
+    outline: none;
+}
+
+.sidenav-toggle::-moz-focus-inner {
+    border: 0;
+}
+
+.sidenav-toggle:focus-visible {
+    box-shadow: 0 0 0 4px rgba(76, 175, 80, .18);
+    border-color: var(--brand);
+}
+
+.sidenav-brand {
+    font-weight: 800;
+    color: var(--txt);
+    letter-spacing: .2px;
+    user-select: none;
+}
+
+/* ========== Contenido ========== */
+.sidenav-content {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+/* ========== Item de navegación ========== */
+.sidenav-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--txt);
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    background: transparent;
+    padding: 10px 12px;
+    cursor: pointer;
+    outline: none;
+    text-align: left;
+    transition: background .15s ease, color .15s ease, border-color .15s ease;
+    position: relative;
+    /* para tooltips */
+    -webkit-tap-highlight-color: transparent;
+}
+
+.sidenav-item:hover {
+    background: var(--card-bg);
+    color: var(--brand);
+}
+
+.sidenav-item:focus {
+    outline: none;
+}
+
+.sidenav-item::-moz-focus-inner {
+    border: 0;
+}
+
+.sidenav-item:focus-visible {
+    box-shadow: 0 0 0 4px rgba(76, 175, 80, .18);
+    border-color: var(--brand);
+}
+
+/* Indicador activo sutil + colores */
+.sidenav-item.active {
+    background: var(--card-bg);
+    color: var(--brand-700);
+    border-color: transparent;
+}
+
+/* Barra indicadora vertical para activo (decorativa) */
+.sidenav-item.active::before {
+    content: "";
+    position: absolute;
+    left: -4px;
+    top: 8px;
+    bottom: 8px;
+    width: 3px;
+    border-radius: 2px;
+    background: var(--brand);
+    opacity: .95;
+}
+
+/* Texto del item: aparece al expandir */
+.sidenav-item span {
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity .18s ease, transform .18s ease;
+    white-space: nowrap;
+    color: var(--txt);
+    font-size: .975rem;
+    font-weight: 600;
+    user-select: none;
+}
+
+.sidenav.open .sidenav-item span {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ========== Tooltips en modo colapsado ========== */
+.sidenav:not(.open) .sidenav-item::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: calc(100% + 8px);
+    top: 50%;
+    transform: translateY(-50%);
+    background: #111827;
+    color: white;
+    padding: 6px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .15s ease, transform .15s ease;
+    white-space: nowrap;
+    z-index: 1600;
+}
+
+.sidenav:not(.open) .sidenav-item:hover::after {
+    opacity: 1;
+    transform: translate(4px, -50%);
+}
+
+/* Evita que el SVG reciba focus/outline */
+.sidenav-item>svg,
+.sidenav-toggle>svg {
+    pointer-events: none;
+}
+
+/* ========== Contenido principal ========== */
+
+
+.sidenav.open~.dashboard-content {
+    margin-left: var(--open-w);
+}
+
+.dashboard-section {
+    padding: 12px;
+    max-width: 850px;
+    width: 100vw;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 900px) {
+    .sidenav {
+        transform: translateX(-100%);
+        transition: transform .22s ease, width .22s ease;
+    }
+
+    .sidenav.open {
+        transform: translateX(0);
+    }
+
+    .dashboard-content,
+    .sidenav.open~.dashboard-content {
+        margin-left: 0;
+    }
+}
+
+/* ========== Accesibilidad / Motion preferencia ========== */
+@media (prefers-reduced-motion: reduce) {
+
+    .sidenav,
+    .sidenav-backdrop,
+    .sidenav-item span,
+    .sidenav-item::after,
+    .dashboard-content {
+        transition: none !important;
+    }
+}
+
+/* Estructura del dashboard */
+.buy-dashboard {
+    margin-top: 30px;
     display: flex;
     justify-content: center;
-    gap: 2rem;
-    margin-top: 2rem;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+    width: 100%;
+}
+
+@media (min-width: 640px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.buy-dashboard {
+    padding: 30px;
+    /* Un poco más de padding para el contenido del dashboard */
+    max-width: 900px;
+    /* Limita el ancho para que no se vea muy estirado en pantallas grandes */
+    margin: 0 auto;
+    /* Centra el contenido */
+}
+
+.dashboard-title {
+    font-size: 2.5rem;
+    /* Título grande y prominente */
+    color: var(--txt);
+    margin-bottom: 40px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.info-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    /* 2 columnas en escritorio, adaptable */
+    gap: 25px;
+    /* Espacio entre las cards */
+    margin-bottom: 40px;
+}
+
+.info-card {
+    background: var(--bg);
+    /* Usa tu color de fondo principal */
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: var(--shadow);
+    /* Reutiliza tu sombra */
+    transition: transform 0.2s ease-in-out;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    /* Pequeño efecto hover */
+}
+
+.info-card.full-width {
+    grid-column: 1 / -1;
+    /* Hace que esta card ocupe todo el ancho de la rejilla */
+    /* Estilos específicos si la card full-width necesita algo diferente */
+}
+
+.card-icon {
+    font-size: 3.5rem;
+    /* Iconos más grandes */
+    color: var(--brand);
+    /* Color de marca para los iconos */
+    margin-bottom: 15px;
+}
+
+.card-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--txt);
+    margin-bottom: 8px;
+}
+
+.card-value {
+    font-size: 2rem;
+    /* Valores principales grandes */
+    font-weight: 800;
+    color: var(--brand-700);
+    margin-bottom: 5px;
+}
+
+.card-sub-value {
+    font-size: 0.95rem;
+    color: var(--txt-muted);
+}
+
+.action-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Centra el botón y el mensaje */
+    gap: 30px;
+}
+
+.buy-button {
+    background: var(--brand);
+    /* Tu color de marca para el botón */
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+    /* Sombra más pronunciada */
+    transition: background 0.2s ease, transform 0.1s ease;
+    width: 100%;
+    /* El botón ocupa todo el ancho de su contenedor */
+    max-width: 350px;
+    /* Limita el ancho máximo del botón */
+}
+
+.buy-button:hover {
+    background: var(--brand-700);
+    transform: translateY(-2px);
+}
+
+.buy-button:active {
+    transform: translateY(0);
+}
+
+.motivational-card {
+    background: var(--card-bg);
+    /* Usa un color de fondo diferente para destacar */
+    border: 1px solid var(--brand);
+    /* Borde con color de marca */
+    border-radius: var(--radius);
+    padding: 30px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    max-width: 600px;
+    /* Limita el ancho para una mejor lectura */
+    color: var(--txt);
+    line-height: 1.6;
+    display: flex;
+    /* Para centrar el icono y el texto */
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.motivational-icon {
+    font-size: 3rem;
+    color: var(--brand);
+}
+
+.motivational-card p {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--txt-muted);
+}
+
+/* Responsive para móvil */
+@media (max-width: 768px) {
+    .dashboard-title {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+
+    .info-cards-grid {
+        grid-template-columns: 1fr;
+        /* Una columna en pantallas pequeñas */
+        gap: 20px;
+    }
+
+    .buy-dashboard {
+        padding: 10px;
+    }
+
+    .buy-button {
+        padding: 12px 25px;
+        font-size: 1.1rem;
+    }
+
+    .motivational-card {
+        padding: 25px;
+        font-size: 1rem;
+    }
+}
+
+.profile-form {
+  max-width: 520px;
+  margin: 32px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: var(--bg);
+  padding: 32px 24px 24px 24px;
+  border-radius: 16px;
+  box-shadow: 0 0 16px 0 #3b7d5811;
+}
+.profile-form-row {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-bottom: 0;
+}
+.profile-form label {
+  flex: 0 0 175px;
+  color: var(--txt-muted, #888);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.2px;
+  text-align: right;
+}
+.profile-form input {
+  flex: 1 1 0%;
+  font-size: 1.06rem;
+  padding: 9px 13px;
+  border-radius: 6px;
+  border: 1px solid var(--line, #e0e6ed);
+  background: #f7fafb;
+  color: #444;
+  outline: none;
+  transition: border-color .14s, background .17s;
+}
+.profile-form input:disabled {
+  background: #f7fafb;
+  color: #77818c;
+  border: 1px solid #e0e6ed;
+  opacity: 1;
+  cursor: default;
+}
+.profile-form input:focus {
+  border-color: var(--brand,#36ac67);
+  background: #fff;
+}
+
+@media (max-width: 640px) {
+  .profile-form {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .profile-form-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 5px;
+  }
+  .profile-form label {
+    text-align: left;
+    padding-bottom: 2px;
+    font-size: .97rem;
+  }
 }
