@@ -607,52 +607,7 @@ html { overflow-x: hidden; }
     max-width: 860px;
     margin: 0 auto 34px;
   }
-  
-  .problem-badges {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: nowrap;
-    margin: 20px 0 20px;
-  }
-  
-  .problem-badge {
-    padding: 10px 14px;
-    border-radius: 999px;
-    background: rgba(165, 214, 167, 0.25);
-    border: 1px dashed rgba(44, 107, 47, 0.3);
-    color: var(--dark-green);
-    font-weight: 500;
-    font-size: 0.95rem;
-    transition: all 0.4s ease;
-    transform: translateY(0);
-  }
 
-  .problem-badge:hover {
-    background: var(--light-green);
-    color: white;
-    transform: translateY(-6px);
-    box-shadow: 0 10px 25px rgba(76, 175, 80, 0.3);
-  }
-
-@keyframes badgeFadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(15px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .problem-badge {
-    animation: badgeFadeUp 0.8s ease forwards;
-  }
-  .problem-badge:nth-child(2) { animation-delay: 0.1s; }
-  .problem-badge:nth-child(3) { animation-delay: 0.2s; }
-  .problem-badge:nth-child(4) { animation-delay: 0.3s; }
-  
   .problem-points {
     display: flex;
     flex-direction: column;
@@ -719,25 +674,53 @@ html { overflow-x: hidden; }
   margin: 0 auto 18px;
 }
 
-/* Badges */
 .solution-badges {
-  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
   margin-top: 8px;
 }
-.solution-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 8px 12px; border-radius: 999px;
-  background: rgba(76,175,80,.12);
-  color: var(--dark-green);
-  border: 1px solid rgba(129,199,132,.35);
-  font-weight: 600; font-size: .95rem;
-  transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+
+@keyframes badgeFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
+
+.solution-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(76, 175, 80, 0.12);
+  color: var(--dark-green);
+  border: 1px solid rgba(129, 199, 132, 0.35);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transform: translateX(-30px);
+  opacity: 0;
+  animation: badgeFadeIn 0.6s ease forwards;
+}
+
+.solution-badge:nth-child(1) { animation-delay: 0.1s; }
+.solution-badge:nth-child(2) { animation-delay: 0.25s; }
+.solution-badge:nth-child(3) { animation-delay: 0.4s; }
+.solution-badge:nth-child(4) { animation-delay: 0.55s; }
+.solution-badge:nth-child(5) { animation-delay: 0.7s; }
+
 .solution-badge:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 24px rgba(76,175,80,.25);
-  background: rgba(76,175,80,.18);
+  box-shadow: 0 10px 24px rgba(76, 175, 80, 0.25);
+  background: rgba(76, 175, 80, 0.18);
 }
+
 .solution-badge svg { width: 18px; height: 18px; }
 
 /* Cómo funciona (3 pasos) */
@@ -1026,7 +1009,6 @@ html { overflow-x: hidden; }
   .u-timeline-line { display: none; } /* se ve más limpio en vertical */
 }
 
-/* Fondo y hero */
 .vp-bg { background: #eaefed;}
 
 .vp-hero {
@@ -1138,3 +1120,66 @@ html { overflow-x: hidden; }
   .vp-unique-head,.vp-unique-row{ grid-template-columns: 1fr; }
   .vp-unique .bad,.vp-unique .good{ text-align:left; border-left:none; }
 }
+
+.imp-bg{ background: #eaefed;}
+.imp-hero{ padding: clamp(90px,10vw,150px) 24px 40px; max-width:1100px; margin:0 auto; text-align:center; }
+.imp-title{ font-size:clamp(2.2rem,4.6vw,3.2rem); color:var(--dark-green); margin:0; }
+.imp-underline{ width:92px; height:6px; margin:14px auto 18px;
+  background:linear-gradient(90deg, var(--primary-green), var(--light-green)); border-radius:999px; }
+.imp-sub{ color:var(--text-light); font-size:clamp(1rem,2vw,1.15rem); max-width:880px; margin:0 auto 18px; }
+
+.impact-kpis{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem;
+  background:var(--white); border:1px solid rgba(129,199,132,.25);
+  border-radius:16px; padding:18px; box-shadow:0 12px 28px rgba(0,0,0,.06);
+}
+.kpi{ text-align:center; padding:12px; border-radius:12px; background:rgba(165,214,167,.18); }
+.kpi-num{ font-size:2rem; font-weight:800; color:var(--dark-green) }
+.kpi-label{ font-weight:600; color:var(--text-dark) }
+@media (max-width:900px){ .impact-kpis{ grid-template-columns:1fr } }
+
+/* Pilares */
+.imp-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; margin-top:2rem; }
+@media (max-width:900px){ .imp-grid{ grid-template-columns:1fr } }
+.imp-card{ height:100% }
+
+.scalability-wrap{
+  display:flex; flex-direction:column; align-items:start; margin-top:1rem; align-items: center; justify-content: center;
+}
+@media (max-width:1000px){ .scalability-wrap{ grid-template-columns:1fr } }
+
+.pill-chips{ display:flex; flex-wrap:wrap; gap:14px; margin:20px 0; justify-content: center; }
+.pill-chip{
+  display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px;
+  background:#fff; border:1px solid rgba(129,199,132,.35); color:var(--dark-green);
+  box-shadow:0 8px 18px rgba(0,0,0,.06);
+}
+
+/* Roadmap mini timeline */
+.scal-roadmap{
+  position:relative; background:#fff; border:1px solid rgba(129,199,132,.25);
+  border-radius:16px; padding:18px; box-shadow:0 12px 28px rgba(0,0,0,.06);
+  display:grid; grid-template-columns: repeat(3,1fr); gap:1rem;
+}
+@media (max-width:900px){ .scal-roadmap{ grid-template-columns:1fr } }
+
+.rm-line{
+  position:absolute; left:18px; right:18px; top:46px; height:4px;
+  background:linear-gradient(90deg, var(--primary-green), var(--light-green));
+  border-radius:2px; opacity:.6;
+}
+.rm-step{ position:relative; z-index:1; display:grid; justify-items:center; gap:8px; padding-top:8px; }
+.rm-dot{
+  width:64px; height:64px; border-radius:50%; display:grid; place-items:center;
+  background:var(--card-bg); color:var(--dark-green);
+  box-shadow: inset 0 0 0 6px rgba(255,255,255,.6), 0 12px 24px rgba(0,0,0,.12);
+  transition: transform .25s ease, box-shadow .25s ease, color .25s ease;
+}
+.rm-dot svg{ width:28px; height:28px }
+.rm-step:hover .rm-dot{
+  transform: translateY(-3px) scale(1.04);
+  box-shadow:0 16px 28px rgba(76,175,80,.28), inset 0 0 0 6px rgba(255,255,255,.7);
+  color:var(--primary-green);
+}
+.rm-info h4{ margin:0; color:var(--dark-green); font-size:1rem; text-align:center }
+.rm-info p{ margin:2px 0 0; color:var(--text-light); font-size:.9rem; text-align:center }

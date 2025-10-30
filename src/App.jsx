@@ -12,6 +12,7 @@ import GovernmentDashboard from './components/admin/GovernmentDashboard';
 import Solution from './components/public/Solution';
 import User from './components/public/User';
 import Propuesta from './components/public/Propuesta';
+import Impacto from './components/public/Impacto';
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
         <Route path="/solution" element={<Solution />} />
         <Route path="/user" element={<User />} />
         <Route path="/proposal" element={<Propuesta />} />
+        <Route path="/impact" element={<Impacto />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/business" element={<BusinessDashboard/>}/>

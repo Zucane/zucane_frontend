@@ -24,11 +24,11 @@ export default function Problem() {
         </p>
 
         <div className="problem-horizontal">
-            <div className="problem-badges">
-            <span className="problem-badge">Falta de transparencia</span>
-            <span className="problem-badge">Barreras de acceso</span>
-            <span className="problem-badge">Trazabilidad limitada</span>
-            <span className="problem-badge">Baja monetización</span>
+            <div className="solution-badges">
+            <span className="solution-badge">Falta de transparencia</span>
+            <span className="solution-badge">Barreras de acceso</span>
+            <span className="solution-badge">Trazabilidad limitada</span>
+            <span className="solution-badge">Baja monetización</span>
             </div>
 
             <div className="problem-points">

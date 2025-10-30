@@ -30,10 +30,10 @@ export default function User() {
           Zucane conecta <strong>campo y mercado</strong> con trazabilidad, facilidad de uso y respaldo verificable.
         </p>
 
-        <div className="users-badges">
-          <span className="users-badge"><LuTarget /> Segmentación clara</span>
-          <span className="users-badge"><LuShieldCheck /> Verificable</span>
-          <span className="users-badge"><LuHandshake /> Conexión directa</span>
+        <div className="solution-badges">
+          <span className="solution-badge"><LuTarget /> Segmentación clara</span>
+          <span className="solution-badge"><LuShieldCheck /> Verificable</span>
+          <span className="solution-badge"><LuHandshake /> Conexión directa</span>
         </div>
       </section>
 

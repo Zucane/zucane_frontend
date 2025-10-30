@@ -6,7 +6,6 @@ import { LuShieldCheck, LuWallet, LuSparkles } from "react-icons/lu";
 export default function Propuesta() {
   const [scrollProgress, setScrollProgress] = useState(0);
 
-  // progress bar (igual que en Landing/Solution/Users)
   useEffect(() => {
     const onScroll = () => {
       const st = window.scrollY || 0;
@@ -32,7 +31,7 @@ export default function Propuesta() {
           con la <strong>sostenibilidad local</strong>.
         </p>
 
-        <div className="vp-badges">
+        <div className="solution-badges">
           <span className="solution-badge"><FaBolt /> Liquidación instantánea</span>
           <span className="solution-badge"><LuShieldCheck /> Auditoría on-chain</span>
           <span className="solution-badge"><LuWallet /> Tokens negociables</span>
