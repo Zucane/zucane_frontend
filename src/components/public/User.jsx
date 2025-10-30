@@ -4,7 +4,7 @@ import { FaLeaf, FaBuilding, FaUserTie, FaCheckCircle} from "react-icons/fa";
 import { LuTarget, LuHandshake, LuWallet, LuShieldCheck } from "react-icons/lu";
 import Timeline from "./timeLine";
 
-export default function Users() {
+export default function User() {
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
