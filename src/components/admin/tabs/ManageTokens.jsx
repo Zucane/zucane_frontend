@@ -152,7 +152,6 @@ useEffect(() => {
 
   return (
     <div className="landing-container tokens-bg">
-      <TopNavBar />
       <div className="scroll-indicator" style={{ transform: `scaleX(${scrollProgress / 100})` }} />
 
       <section className="section tokens-hero">
