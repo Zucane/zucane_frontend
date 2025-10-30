@@ -11,7 +11,7 @@ export default function TopNavBar() {
     const itemsCenter = [
         { label: 'Problema', to: '/problem' },
         { label: 'Solución', to: '/solution' },
-        { label: 'Usuario', to: '/contact' },
+        { label: 'Usuario', to: '/user' },
         { label: 'Propuesta', to: '/proposal' },
         { label: 'Impacto', to: '/impact' },
         { label: 'Equipo', to: '/team' },
