@@ -31,6 +31,15 @@
     width: 100%;
 }
 
+/* Ensancha el formulario de registro sin afectar login */
+.register-wide {
+    max-width: 550px;
+    width: 100%;
+}
+@media (max-width: 900px) {
+    .register-wide { max-width: 100%; }
+}
+
 .login-grid {
     display: grid;
     grid-template-columns: 6fr 1fr 5fr;
@@ -47,6 +56,19 @@
     color: var(--dark-green);
     font-weight: 700;
     font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.register-title {
+    color: var(--dark-green);
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.register-subtitle {
+    color: var(--text-light);
+    font-size: 1.2rem;
     margin-bottom: 2rem;
 }
 
