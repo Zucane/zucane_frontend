@@ -17,10 +17,10 @@ export default function TopNavBar() {
         { label: 'Equipo', to: '/team' },
     ];
     const login = [
-        { label: 'Iniciar', to: '/login' },
+        { label: 'Iniciar Sesión', to: '/login' },
     ];
     const register = [
-        { label: 'Registrar', to: '/register' },
+        { label: 'Registrarse', to: '/register' },
     ];
 
     const isActive = (to) => location.pathname === to;

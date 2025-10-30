@@ -128,6 +128,7 @@ html { overflow-x: hidden; }
   background: var(--light-green);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+  color: var(--white);
 }
 
 .card {
@@ -160,9 +161,14 @@ html { overflow-x: hidden; }
   align-items: center;
   justify-content: center;
   margin-bottom: 1.5rem;
-  margin-left: auto;  /* center horizontally inside card */
-  margin-right: auto; /* center horizontally inside card */
+  margin-left: auto;
+  margin-right: auto;
   font-size: 1.5rem;
+}
+
+.card-icon svg {
+  width: 25px;
+  height: 25px;
   color: var(--dark-green);
 }
 
