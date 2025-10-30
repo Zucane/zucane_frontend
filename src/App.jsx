@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import TopNavBar from './components/TopNavBar';
 import Landing from './components/public/Landing';
+import Problem from './components/public/Problem';
 import './App.css';
 import './components/nav.css';
 import Login from './components/user/managment/Login';
@@ -18,7 +19,7 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/services" element={<Services />} />
+        <Route path="/problema" element={<Problem />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
