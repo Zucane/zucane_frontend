@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './styles.css';
 import './form.css';
+import granjero from '../../../assets/granjero.jpg';
 import logo from '../../../assets/logo.jpeg';
 // import { Link } from 'react-router-dom' // <- si usas React Router
 import FormFieldValidation from './FormFieldValidation';
@@ -107,7 +108,7 @@ export default function Login() {
                     {/* LADO DERECHO */}
                     <div className="login-image-section">
                         <img
-                            src="/ruta/de/tu/imagen.jpg"
+                            src={granjero}  // <- cambia a tu archivo
                             alt="Login visual"
                             className="login-img"
                         />
