@@ -75,7 +75,6 @@ const Landing = () => {
     };
   }, [xochiInView]);
 
-  // Seguimiento del mouse (solo en vista y si no hay reduce-motion)
   useEffect(() => {
     const el = fanRef.current;
     if (!el) return;
@@ -111,7 +110,7 @@ const Landing = () => {
   ].map((it) => ({
     ...it,
     absI: Math.abs(it.i),
-    tier: (Math.abs(it.i) * 8) * -1, // baja un poco las laterales
+    tier: (Math.abs(it.i) * 8) * -1,
   }));
 
   return (
@@ -122,7 +121,6 @@ const Landing = () => {
         style={{ transform: `scaleX(${scrollProgress / 100})` }}
       />
 
-      {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-content">
           <h1 className="hero-title">CO₂ Coin</h1>
@@ -135,7 +133,6 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Section 1: ¿Qué es Xochitepec? */}
       <section id="xochitepec" className="section">
         <h2 className="section-title">¿Qué es Xochitepec?</h2>
         <div className="card-grid">
@@ -168,7 +165,6 @@ const Landing = () => {
           </div>
         </div>
 
-        {/* Fan deck carousel */}
         <div className="fan-wrap">
         <div
             ref={fanRef}
