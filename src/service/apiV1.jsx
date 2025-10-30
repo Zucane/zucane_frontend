@@ -2,9 +2,7 @@ import axios from 'axios'
 
 const fallbackBaseURL = (() => {
     try {
-        if (typeof window !== 'undefined' && window.location && window.location.hostname === 'localhost') {
-            return 'http://localhost:8000';
-        }
+        return 'http://192.168.100.8:8000'
     } catch {}
     return 'http://192.168.100.8:8000';
 })();

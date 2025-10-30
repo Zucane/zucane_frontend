@@ -6,13 +6,13 @@ import {
 import './styles.css';
 
 const tabs = [
-    { key: 'emit', name: 'Emitir Tokens', icon: <MdAddCircle size={22} />, tooltip: 'Emitir Tokens' },
     { key: 'manage', name: 'Gestionar Tokens', icon: <MdInventory size={22} />, tooltip: 'Gestionar Tokens' },
-    { key: 'transactions', name: 'Transacciones', icon: <MdReceiptLong size={22} />, tooltip: 'Transacciones' },
-    { key: 'payments', name: 'Pagos Internos', icon: <MdPayments size={22} />, tooltip: 'Pagos Internos' },
-    { key: 'audit', name: 'Auditoría', icon: <MdSearch size={22} />, tooltip: 'Auditoría' },
-    { key: 'reports', name: 'Reportes', icon: <MdAnalytics size={22} />, tooltip: 'Reportes' },
-    { key: 'users', name: 'Usuarios', icon: <MdPeople size={22} />, tooltip: 'Usuarios' }
+    // { key: 'emit', name: 'Emitir Tokens', icon: <MdAddCircle size={22} />, tooltip: 'Emitir Tokens' },
+    // { key: 'transactions', name: 'Transacciones', icon: <MdReceiptLong size={22} />, tooltip: 'Transacciones' },
+    // { key: 'payments', name: 'Pagos Internos', icon: <MdPayments size={22} />, tooltip: 'Pagos Internos' },
+    // { key: 'audit', name: 'Auditoría', icon: <MdSearch size={22} />, tooltip: 'Auditoría' },
+    // { key: 'reports', name: 'Reportes', icon: <MdAnalytics size={22} />, tooltip: 'Reportes' },
+    // { key: 'users', name: 'Usuarios', icon: <MdPeople size={22} />, tooltip: 'Usuarios' }
 ];
 
 export default function GovLeftNavBar({ activeTab, onSectionChange, isOpen, onToggle, onLogout }) {

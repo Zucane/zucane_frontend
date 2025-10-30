@@ -90,25 +90,24 @@ useEffect(() => {
       .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
       .join("&");
 
-  const loadCompanies = async () => {
-    setLoading(true);
-    setError("");
-    try {
-      // Si tu getCompanies actual NO recibe querystring, cámbialo a getCompanies() y maneja paginación en backend más tarde.
-      const queryStr = qs({ page, size, status });
-      const data = await getCompanies(queryStr ? `?${queryStr}` : "");
-      const { empresas, total: tot } = data || {};
-      setCompanies(empresas || []);
-      setTotal(Number(tot || 0));
-    } catch (e) {
-      console.error(e);
-      setError("No se pudieron cargar las empresas.");
-      setCompanies([]);
-      setTotal(0);
-    } finally {
-      setLoading(false);
-    }
-  };
+      const loadCompanies = async () => {
+        setLoading(true);
+        setError('');
+        try {
+          const data = await getCompanies({ page, size, status }); // <-- params reales
+          const { empresas, total: tot } = data || {};
+          setCompanies(empresas || []);
+          setTotal(Number(tot || 0));
+        } catch (e) {
+          console.error(e);
+          setError('No se pudieron cargar las empresas.');
+          setCompanies([]);
+          setTotal(0);
+        } finally {
+          setLoading(false);
+        }
+      };
+      
 
   useEffect(() => {
     loadCompanies();
@@ -246,18 +245,13 @@ useEffect(() => {
                     </div>
 
                     <div className="row balance">
-  <div className={`balance-box ${balError[pk] ? 'has-error' : ''}`}>
-    <span className="label">Balance ZUCOIN</span>
-    <span className="value">
-      {balLoading[pk] ? 'Cargando…' : (Number.isFinite(balances[pk]) ? balances[pk] : 0)}
-    </span>
-  </div>
-  {balError[pk] && (
-    <div className="balance-hint" title={balError[pk]}>
-      ⚠️ {balError[pk]}
-    </div>
-  )}
-</div>
+                      <div className={`balance-box ${balError[pk] ? 'has-error' : ''}`}>
+                        <span className="label">Balance ZUCOIN</span>
+                        <span className="value">
+                          {balLoading[pk] ? 'Cargando…' : (Number.isFinite(balances[pk]) ? balances[pk] : 0)}
+                        </span>
+                      </div>
+                    </div>
 
                   </article>
                 );
