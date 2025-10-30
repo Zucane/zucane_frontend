@@ -504,7 +504,6 @@
     border: 2px dashed var(--txt-muted);
     /* Borde punteado para indicar placeholder */
     display: flex;
-    align-items: center;
     justify-content: center;
     overflow: hidden;
     transition: background 0.2s;
