@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import TopNavBar from '../../TopNavBar';
 import RightDrawerNavbar from './LeftNavBar';
 import CO2ShopModal from './CO2ShopModal';
-import CO2ConfirmModal from './CO2ConfirmModal';
 import Buy from './Buy';
 import Receipts from './Receipts';
 import Company from './Company';
@@ -27,8 +26,6 @@ function LogoutModal({ isOpen, onConfirm, onCancel }) {
 export default function BusinessDashboard() {
     const [section, setSection] = useState('shop');
     const [showShopModal, setShowShopModal] = useState(false);
-    const [showConfirmModal, setShowConfirmModal] = useState(false);
-    const [selectedAmount, setSelectedAmount] = useState(0);
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [showLogoutModal, setShowLogoutModal] = useState(false);
     const navigate = useNavigate();
@@ -40,16 +37,12 @@ export default function BusinessDashboard() {
 
     const handleBuyClick = () => setShowShopModal(true);
 
-    const handleConfirmShop = (amount) => {
-        setSelectedAmount(amount);
+    const handlePurchaseComplete = (response) => {
+        // Cerramos el modal
         setShowShopModal(false);
-        setShowConfirmModal(true);
-    };
-
-    const handleAcceptBuy = () => {
-        setShowConfirmModal(false);
-        // Puedes poner un fetch/post o lógica aquí
-        alert(`¡Has comprado ${selectedAmount} CO₂ Coins!`);
+        
+        // La recarga de la página y la redirección ya se manejan en el modal
+        console.log('Compra completada:', response);
     };
 
     const handleLogout = () => {
@@ -91,8 +84,11 @@ export default function BusinessDashboard() {
                     {section === 'business' && <Company />}
                 </div>
             </div>
-            <CO2ShopModal isOpen={showShopModal} onClose={() => setShowShopModal(false)} onConfirm={handleConfirmShop} />
-            <CO2ConfirmModal isOpen={showConfirmModal} amount={selectedAmount} onCancel={() => setShowConfirmModal(false)} onAccept={handleAcceptBuy} />
+            <CO2ShopModal 
+                isOpen={showShopModal} 
+                onClose={() => setShowShopModal(false)} 
+                onConfirm={handlePurchaseComplete}
+            />
         </div>
     );
 }

@@ -49,8 +49,8 @@ export default function FormFieldValidation({
           err = "El correo electrónico debe ser válido y contener un '@' y un '.com'";
         }
       } else if (type === 'password' && name === 'password') {
-        if (!value || String(value).length < 6) {
-          err = 'La contraseña debe tener al menos 6 caracteres.';
+        if (!value || String(value).length < 10) {
+          err = 'La contraseña debe tener al menos 10 caracteres.';
         }
       } else if (type === 'password' && name === 'confirmPassword') {
         if (!value || value !== compareValue) {

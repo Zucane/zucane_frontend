@@ -5,9 +5,15 @@ export const getAssetBalance = async () => {
     return response.data;
 };
 
-export const getBusinessBalance = async () => {
-    const response = await api.get('/api/business/balance');
-    return response.data;
+export const getBusinessBalance = async (accountPublicKey) => {
+    try {
+        const url = `/api/business/balance?account_public_key=${accountPublicKey}`;
+        const response = await api.get(url);
+        return response.data;
+    } catch (error) {
+        console.error("Error al obtener el balance de la empresa:", error);
+        throw error;
+    }
 };
 
 export const postBusinessPurchase = async (asset_amount, business_private_key) => {
