@@ -56,28 +56,26 @@ export default function Buy({ costoMXN, XLM, hectareas, handleBuyClick }) {
                     <p className="card-value">{coins ? coins : "Cargando..."}</p> {/* Muestra el balance o "Cargando..." */}
                 </div>
 
-                {/* Card 2: Costo por Coin */}
-                <div className="info-card">
-                    <FaDollarSign className="card-icon" />
-                    <h3 className="card-title">Costo por ZUCOIN</h3>
-                    <p className="card-value">${businessBalance.asset_to_MXN ? businessBalance.asset_to_MXN : "Cargando..."} MXN</p>
-                    <p className="card-sub-value">{businessBalance.asset_to_XLM ? businessBalance.asset_to_XLM : "Cargando..."} XLM</p>
-                </div>
-
-                {/* Card 3: Equivalente en Hectáreas */}
-                <div className="info-card full-width"> {/* Usamos full-width para que ocupe todo el ancho */}
-                    <FaSeedling className="card-icon" />
-                    <h3 className="card-title">Impacto en CO2</h3>
-                    <p className="card-value">{businessBalance.hectares ? businessBalance.hectares : "Cargando..."} Hectáreas de Caña de Azúcar</p>
-                    <p className="card-sub-value">Neutralizadas anualmente</p>
-                </div>
-
-                {/* Card 4: ZUCOINS de la Empresa */}
-                <div className="info-card full-width"> {/* Usamos full-width para que ocupe todo el ancho */}
+                <div className="info-card">+
                     <FaCoins className="card-icon" />
                     <h3 className="card-title">ZUCOINS de la Empresa</h3>
                     <p className="card-value">{businessBalance.asset_balance ? businessBalance.asset_balance : "Cargando..."}</p> {/* Muestra el balance de ZUCOINS de la empresa */}
                     <p className="card-sub-value">Balance disponible para transacciones</p>
+                </div>
+
+                {/* Card 2: Costo por Coin */}
+                <div className="info-card">
+                    <FaSeedling className="card-icon" />
+                    <h3 className="card-title">Hectáreas adquiridas</h3>
+                    <p className="card-value">{businessBalance.hectares ? businessBalance.hectares : "Cargando..."} Hectáreas de Caña de Azúcar</p>
+                    <p className="card-sub-value">Neutralizadas anualmente</p>
+                </div>
+                
+                <div className="info-card">
+                    <FaDollarSign className="card-icon" />
+                    <h3 className="card-title">Dinero invertido</h3>
+                    <p className="card-value">${businessBalance.asset_to_MXN ? businessBalance.asset_to_MXN : "Cargando..."} MXN</p>
+                    <p className="card-sub-value">{businessBalance.asset_to_XLM ? businessBalance.asset_to_XLM : "Cargando..."} XLM</p>
                 </div>
             </div>
 

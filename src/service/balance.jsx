@@ -17,6 +17,18 @@ export const getBusinessBalance = async (accountPublicKey) => {
 };
 
 export const postBusinessPurchase = async (asset_amount, business_private_key) => {
-    const response = await api.post('/api/business/purchase', { asset_amount, business_private_key });
-    return response.data;
+    const response = await api.post('/api/business/purchase', { asset_amount, business_private_key }, { responseType: 'blob' });
+
+    // Retorna el blob y el nombre sugerido por el servidor
+    const blob = new Blob([response.data], { type: 'application/pdf' });
+
+  // Intentamos obtener el nombre del archivo desde los headers
+    const contentDisposition = response.headers['content-disposition'];
+    let filename = 'purchase_invoice.pdf';
+    if (contentDisposition) {
+    const match = contentDisposition.match(/filename="?(.+)"?/);
+    if (match && match[1]) filename = match[1];
+}
+
+return { blob, filename };
 };
