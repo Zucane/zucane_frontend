@@ -1,10 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './styles.css';
 import './form.css';
 import logo from '../../../assets/logo.jpeg';
 // import { Link } from 'react-router-dom' // <- si usas React Router
+import FormFieldValidation from './FormFieldValidation';
 
 export default function Login() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [submitError, setSubmitError] = useState('');
+    const [validateTick, setValidateTick] = useState(0);
+
+    const isEmailValid = (v) => v && v.includes('@') && v.endsWith('.com');
+    const isPasswordValid = (v) => v && v.length >= 6;
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setSubmitError('');
+        const okEmail = isEmailValid(email);
+        const okPass = isPasswordValid(password);
+        if (!okEmail || !okPass) {
+            setSubmitError('Por favor corrige los campos marcados.');
+            setValidateTick(t => t + 1); // fuerza mostrar errores en inputs
+            return;
+        }
+        alert('Inicio de sesión válido. Continuando...');
+    };
+
     return (
         <div className="login-container">
             <div className="login-card">
@@ -29,34 +51,47 @@ export default function Login() {
 
                         <h2 className="login-title">Iniciar sesión</h2>
 
-                        <form className="login-form" noValidate>
+                        <form className="login-form" noValidate onSubmit={handleSubmit}>
                             <div className="form-field">
                                 <label htmlFor="email" className="login-label">Correo electrónico</label>
-                                <input
+                                <FormFieldValidation
                                     type="email"
-                                    id="email"
-                                    className="login-input"
+                                    name="email"
+                                    value={email}
+                                    onChange={(e)=>setEmail(e.target.value)}
                                     placeholder="nombre@ejemplo.com"
                                     autoComplete="email"
                                     required
-                                    aria-describedby="email-hint"
+                                    renderLabel={false}
+                                    wrapClassName="form-field"
+                                    inputClassName="login-input"
+                                    validateSignal={validateTick}
                                 />
                             </div>
 
                             <div className="form-field">
                                 <label htmlFor="password" className="login-label">Contraseña</label>
-                                <input
+                                <FormFieldValidation
                                     type="password"
-                                    id="password"
-                                    className="login-input"
+                                    name="password"
+                                    value={password}
+                                    onChange={(e)=>setPassword(e.target.value)}
                                     placeholder="••••••••"
                                     autoComplete="current-password"
                                     required
+                                    renderLabel={false}
+                                    wrapClassName="form-field"
+                                    inputClassName="login-input"
+                                    validateSignal={validateTick}
                                 />
                                 <small id="password-hint" className="password-hint">
                                     ¿Olvidaste tu contraseña?
                                 </small>
                             </div>
+
+                            {submitError && (
+                                <div className="form-error-msg" style={{ marginBottom: '10px' }}>{submitError}</div>
+                            )}
 
                             <button type="submit" className="login-button">Iniciar sesión</button>
 

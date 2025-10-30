@@ -69,4 +69,3 @@ export default function LeftNavbar({ activeSection, onSectionChange, isOpen, onT
         </>
     );
 }
-
