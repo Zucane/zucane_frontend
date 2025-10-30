@@ -1,7 +1,16 @@
 import axios from 'axios'
 
+const fallbackBaseURL = (() => {
+    try {
+        if (typeof window !== 'undefined' && window.location && window.location.hostname === 'localhost') {
+            return 'http://localhost:8000';
+        }
+    } catch {}
+    return 'http://192.168.100.8:8000';
+})();
+
 const apiV1 = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || 'http://192.168.100.8:8000',
+    baseURL: import.meta.env.VITE_API_URL || fallbackBaseURL,
     timeout: 30000,
     headers: { 'Content-Type': 'application/json' },
 });

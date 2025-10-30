@@ -14,12 +14,14 @@ export default function FormFieldValidation({
   wrapClassName = 'formfield-validation',
   inputClassName = '',
   validateSignal = 0, // cambia para forzar validación externa
+  suppressValidation = false, // si true, no muestra mensajes ni estados
 }) {
   const [touched, setTouched] = useState(false);
   const [error, setError] = useState('');
   const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
+    if (suppressValidation) return; 
     if (touched) {
       validate();
     }
@@ -27,6 +29,7 @@ export default function FormFieldValidation({
   }, [value, compareValue]);
 
   useEffect(() => {
+    if (suppressValidation) return;
     if (validateSignal > 0) {
       setTouched(true);
       validate();
@@ -35,6 +38,11 @@ export default function FormFieldValidation({
   }, [validateSignal]);
 
   const validate = () => {
+    if (suppressValidation) {
+      setError('');
+      setIsValid(false);
+      return true;
+    }
     let err = '';
     let ok = false;
 
@@ -70,8 +78,8 @@ export default function FormFieldValidation({
     if (!touched) setTouched(true);
   };
 
-  const containerClasses = `${wrapClassName}${error ? ' error' : ''}${isValid ? ' success' : ''}`.trim();
-  const inputClasses = `${inputClassName} ${error ? 'input-error' : isValid ? 'input-success' : ''}`.trim();
+  const containerClasses = `${wrapClassName}${!suppressValidation && error ? ' error' : ''}${!suppressValidation && isValid ? ' success' : ''}`.trim();
+  const inputClasses = `${inputClassName} ${!suppressValidation && error ? 'input-error' : !suppressValidation && isValid ? 'input-success' : ''}`.trim();
 
   return (
     <div className={containerClasses}>
@@ -88,8 +96,8 @@ export default function FormFieldValidation({
         className={inputClasses}
         required={required}
       />
-      {error && <div className="form-error-msg">{error}</div>}
-      {!error && isValid && touched && (
+      {!suppressValidation && error && <div className="form-error-msg">{error}</div>}
+      {!suppressValidation && !error && isValid && touched && (
         <div className="form-success-msg">Campo válido</div>
       )}
     </div>
