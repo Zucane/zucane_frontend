@@ -9,19 +9,15 @@ import Login from './components/user/managment/Login';
 import Register from './components/user/managment/Register';
 import BusinessDashboard from './components/user/logged/BusinessDashboard';
 import GovernmentDashboard from './components/admin/GovernmentDashboard';
-
-function Services() { return <div style={{ padding: 24 }}><h2>Servicios</h2></div> }
-function About() { return <div style={{ padding: 24 }}><h2>Acerca</h2></div> }
-function Contact() { return <div style={{ padding: 24 }}><h2>Contacto</h2></div> }
+import Solution from './components/public/Solution';
 
 export default function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/problema" element={<Problem />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/problem" element={<Problem />} />
+        <Route path="/solution" element={<Solution />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/business" element={<BusinessDashboard/>}/>

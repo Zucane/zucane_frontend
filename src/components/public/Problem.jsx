@@ -1,7 +1,6 @@
 import React from "react";
 import "./styles.css";
 import TopNavBar from "../TopNavBar";
-import { FaMagnifyingGlass } from "react-icons/fa6";
 import { MdOutlineMoneyOff } from "react-icons/md";
 import { VscWorkspaceUntrusted } from "react-icons/vsc";
 import { GrDocumentMissing } from "react-icons/gr";
